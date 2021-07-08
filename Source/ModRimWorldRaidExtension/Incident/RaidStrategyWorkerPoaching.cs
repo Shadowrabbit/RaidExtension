@@ -21,6 +21,7 @@ namespace SR.ModRimWorld.FactionalWar
     {
         private const int MaxPawnCount = 6; //最大生成角色数量
         private const int MinPawnCount = 3; //最小生成角色数量
+        public Pawn TempAnimal { get; set; } //目标动物
 
         /// <summary>
         /// 创建集群AI工作
@@ -32,7 +33,7 @@ namespace SR.ModRimWorld.FactionalWar
         /// <returns></returns>
         protected override LordJob MakeLordJob(IncidentParms parms, Map map, List<Pawn> pawns, int raidSeed)
         {
-            return new LordJobPoaching();
+            return new LordJobPoaching(TempAnimal);
         }
 
         /// <summary>
@@ -48,7 +49,6 @@ namespace SR.ModRimWorld.FactionalWar
             var pawnList = PawnGroupMakerUtility.GeneratePawns(pawnGroupMakerParms).ToList();
             if (pawnList.Count == 0)
             {
-                Log.Warning($"Got no pawns spawning raid from parms {parms}");
                 return pawnList;
             }
 

@@ -18,8 +18,6 @@ namespace SR.ModRimWorld.FactionalWar
     [UsedImplicitly]
     public class JobGiverAIFightAnimal : JobGiver_AIFightEnemies
     {
-        private const float MinTargetRequireHealthScale = 1.7f; //健康缩放最小需求 用来判断动物强度
-
         /// <summary>
         /// 尝试分配工作
         /// </summary>
@@ -56,7 +54,7 @@ namespace SR.ModRimWorld.FactionalWar
             }
 
             //远程的情况 先算当前位置适不适合攻击
-            var num1 = (double) CoverUtility.CalculateOverallBlockChance((LocalTargetInfo) pawn,
+            var num1 = (double)CoverUtility.CalculateOverallBlockChance((LocalTargetInfo)pawn,
                 enemyTarget.Position, pawn.Map) > 0.00999999977648258
                 ? 1
                 : 0;
@@ -97,7 +95,7 @@ namespace SR.ModRimWorld.FactionalWar
         /// <returns></returns>
         public override ThinkNode DeepCopy(bool resolve = true)
         {
-            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal) base.DeepCopy(resolve);
+            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal)base.DeepCopy(resolve);
             return jobGiverAIFightHostileFaction;
         }
 
@@ -110,26 +108,25 @@ namespace SR.ModRimWorld.FactionalWar
         {
             //集群AI
             var lord = pawn.GetLord();
-            //没有成员
-            if (lord.ownedPawns.Count < 1)
+            //集群AI错误
+            if (!(lord?.LordJob is LordJobPoaching lordJobPoaching))
             {
                 return null;
             }
 
-            //队长
-            var leader = lord.ownedPawns[0];
-
-            //验证器
-            bool SpoilValidator(Thing t) => (pawn == null || pawn.CanReserve(t)) && (t is Pawn animal)
-                && animal.RaceProps.Animal && !animal.Downed && !animal.Dead &&
-                animal.RaceProps.baseHealthScale >= MinTargetRequireHealthScale;
-
-            //找队长身边最近的动物
-            var targetThing = GenClosest.ClosestThing_Global_Reachable(leader.Position, leader.Map,
-                leader.Map.mapPawns.AllPawnsSpawned, PathEndMode.ClosestTouch,
-                TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some), validator: SpoilValidator);
-
-            return (Pawn) targetThing;
+            //目标已无威胁
+            if (lordJobPoaching.TargetAnimal.Downed || lordJobPoaching.TargetAnimal.Dead)
+            {
+                return null;
+            }
+            var animal = lordJobPoaching.TargetAnimal;
+            
+            //无法保留
+            if (pawn != null && !pawn.CanReserve(animal))
+            {
+                return null;
+            }
+            return animal;
         }
 
         /// <summary>

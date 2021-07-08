@@ -7,10 +7,13 @@
 //    *(__\_\        @Copyright  Copyright (c) 2021, Shadowrabbit
 // ******************************************************************
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace SR.ModRimWorld.FactionalWar
 {
@@ -65,12 +68,61 @@ namespace SR.ModRimWorld.FactionalWar
         }
 
         /// <summary>
-        /// 袭击点数
+        /// 执行事件
         /// </summary>
         /// <param name="parms"></param>
-        protected override void ResolveRaidPoints(IncidentParms parms)
+        /// <returns></returns>
+        protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            parms.points = ThreatPoints;
+            //处理袭击点数
+            ResolveRaidPoints(parms);
+            //处理袭击派系
+            if (!TryResolveRaidFaction(parms))
+            {
+                Log.Warning("cant find raid factions");
+                return false;
+            }
+            //角色组定义 战斗
+            var combat = PawnGroupKindDefOf.Combat;
+            //处理袭击策略
+            ResolveRaidStrategy(parms, combat);
+            //处理入场方式
+            ResolveRaidArriveMode(parms);
+            //尝试生成威胁（参数）
+            parms.raidStrategy.Worker.TryGenerateThreats(parms);
+            //尝试解决袭击召唤中心
+            if (!parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms))
+            {
+                Log.Warning($"cant resolve raid spawn center: {parms}");
+                return false;
+            }
+            //生成派系部队
+            var pawnList = parms.raidStrategy.Worker.SpawnThreats(parms);
+            if (pawnList.Count == 0)
+            {
+                Log.Warning($"Got no pawns spawning raid from parms {parms}");
+                return false;
+            }
+            //战利品生成
+            GenerateRaidLoot(parms, parms.points, pawnList);
+            //解决信件
+            ResolveLetter(parms, pawnList);
+            //设置集群AI
+            if (!(parms.raidStrategy.Worker is RaidStrategyWorkerPoaching raidStrategyWorkerPoaching))
+            {
+                Log.Error("strategy must be RaidStrategyWorkerPoaching");
+                return false;
+            }
+
+            //设置狩猎目标
+            var animal = FindTargetAnimal(pawnList[0]);
+            raidStrategyWorkerPoaching.TempAnimal = animal;
+            raidStrategyWorkerPoaching.MakeLords(parms, pawnList);
+            //袭击时设置一倍速
+            Find.TickManager.slower.SignalForceNormalSpeedShort();
+            //更新参与袭击的敌人记录
+            Find.StoryWatcher.statsRecord.numRaidsEnemy++;
+            return true;
         }
 
         /// <summary>
@@ -84,12 +136,56 @@ namespace SR.ModRimWorld.FactionalWar
         }
 
         /// <summary>
+        /// 袭击点数
+        /// </summary>
+        /// <param name="parms"></param>
+        protected override void ResolveRaidPoints(IncidentParms parms)
+        {
+            parms.points = ThreatPoints;
+        }
+
+        /// <summary>
         /// 获取信件定义
         /// </summary>
         /// <returns></returns>
         protected override LetterDef GetLetterDef()
         {
             return LetterDefOf.ThreatSmall;
+        }
+
+        /// <summary>
+        /// 解决信件
+        /// </summary>
+        /// <param name="parms"></param>
+        /// <param name="pawnList"></param>
+        protected virtual void ResolveLetter(IncidentParms parms, List<Pawn> pawnList)
+        {
+            var letterLabel = (TaggedString)GetLetterLabel(parms);
+            var letterText = (TaggedString)GetLetterText(parms, pawnList);
+            PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter(pawnList, ref letterLabel, ref letterText,
+                GetRelatedPawnsInfoLetterText(parms), true);
+            SendStandardLetter(letterLabel, letterText, GetLetterDef(), parms, pawnList,
+                Array.Empty<NamedArgument>());
+        }
+
+        /// <summary>
+        /// 寻找猎物
+        /// </summary>
+        /// <param name="leader">集群AI的队长</param>
+        /// <returns></returns>
+        private static Pawn FindTargetAnimal(Thing leader)
+        {
+            //验证器
+            bool SpoilValidator(Thing t) => (t is Pawn animal)
+                                            && animal.RaceProps.Animal && !animal.Downed && !animal.Dead &&
+                                            animal.RaceProps.baseHealthScale >= MinTargetRequireHealthScale;
+
+            //找队长身边最近的动物
+            var targetThing = GenClosest.ClosestThing_Global_Reachable(leader.Position, leader.Map,
+                leader.Map.mapPawns.AllPawnsSpawned, PathEndMode.ClosestTouch,
+                TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some), validator: SpoilValidator);
+
+            return (Pawn)targetThing;
         }
     }
 }

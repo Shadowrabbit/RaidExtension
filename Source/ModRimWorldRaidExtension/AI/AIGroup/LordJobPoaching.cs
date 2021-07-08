@@ -16,6 +16,26 @@ namespace SR.ModRimWorld.FactionalWar
     public class LordJobPoaching : LordJob
     {
         private static readonly IntRange ExitTime = new IntRange(5000, 8000); //离开时间
+        private Pawn _targetAnimal; //集群AI想要猎杀的动物
+        public Pawn TargetAnimal => _targetAnimal;
+
+        public LordJobPoaching()
+        {
+        }
+
+        public LordJobPoaching(Pawn targetAnimal)
+        {
+            _targetAnimal = targetAnimal;
+        }
+
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_References.Look(ref _targetAnimal, "_targetAnimal");
+        }
 
         public override StateGraph CreateGraph()
         {
@@ -32,9 +52,9 @@ namespace SR.ModRimWorld.FactionalWar
             var faction = lord.faction;
             //过渡 偷猎到带着猎物离开
             var transitionPoachingToTakePreyExit = new Transition(lordToilPoaching, lordToilTakePreyExit);
-            //todo 触发条件待优化
-            var triggerTicksPassed = new Trigger_TicksPassed(ExitTime.RandomInRange);
-            transitionPoachingToTakePreyExit.AddTrigger(triggerTicksPassed);
+            //触发条件 目标猎物被击倒
+            var triggerTargetAnimalDowned = new TriggerTargetAnimalDowned(_targetAnimal);
+            transitionPoachingToTakePreyExit.AddTrigger(triggerTargetAnimalDowned);
             transitionPoachingToTakePreyExit.AddPreAction(new TransitionAction_Message(
                 "SrTakePreyExit".Translate(faction.def.pawnsPlural.CapitalizeFirst(),
                     faction.Name), MessageTypeDefOf.ThreatSmall));

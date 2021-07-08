@@ -53,6 +53,7 @@
         <Compile Include="AI\AIGroup\LordToilPoaching.cs" />
         <Compile Include="AI\AIGroup\LordToilTakePreyExit.cs" />
         <Compile Include="AI\AIGroup\LordToilTakeWoodExit.cs" />
+        <Compile Include="AI\AIGroup\TriggerTargetAnimalDowned.cs" />
         <Compile Include="AI\AISingle\JobGiverAIFightAnimal.cs" />
         <Compile Include="AI\AISingle\JobGiverLogging.cs" />
         <Compile Include="AI\AISingle\JobGiverTakePreyExit.cs" />
@@ -62,7 +63,6 @@
         <Compile Include="Incident\RaidStrategyDefOf.cs" />
         <Compile Include="Incident\RaidStrategyWorkerLogging.cs" />
         <Compile Include="Incident\RaidStrategyWorkerPoaching.cs" />
-        <Compile Include="PawnSpawnUtil.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
