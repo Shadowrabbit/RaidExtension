@@ -17,6 +17,8 @@ namespace SR.ModRimWorld.FactionalWar
     [UsedImplicitly]
     public class IncidentWorkerLogging : IncidentWorker_RaidEnemy
     {
+        private const int ThreatPoints = 1000; //袭击点数
+
         /// <summary>
         /// 是否可以生成事件
         /// </summary>
@@ -48,6 +50,15 @@ namespace SR.ModRimWorld.FactionalWar
             return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction;
         }
 
+        /// <summary>
+        /// 袭击点数
+        /// </summary>
+        /// <param name="parms"></param>
+        protected override void ResolveRaidPoints(IncidentParms parms)
+        {
+            parms.points = ThreatPoints;
+        }
+        
         /// <summary>
         /// 解决突袭策略
         /// </summary>

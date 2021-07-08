@@ -32,6 +32,7 @@ namespace SR.ModRimWorld.FactionalWar
             var faction = lord.faction;
             //过渡 偷猎到带着猎物离开
             var transitionPoachingToTakePreyExit = new Transition(lordToilPoaching, lordToilTakePreyExit);
+            //todo 触发条件待优化
             var triggerTicksPassed = new Trigger_TicksPassed(ExitTime.RandomInRange);
             transitionPoachingToTakePreyExit.AddTrigger(triggerTicksPassed);
             transitionPoachingToTakePreyExit.AddPreAction(new TransitionAction_Message(

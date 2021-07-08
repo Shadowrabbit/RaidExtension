@@ -20,7 +20,7 @@ namespace SR.ModRimWorld.FactionalWar
     public class RaidStrategyWorkerPoaching : RaidStrategyWorker
     {
         private const int MaxPawnCount = 6; //最大生成角色数量
-        private const int MinPawnCount = 1; //最小生成角色数量
+        private const int MinPawnCount = 3; //最小生成角色数量
 
         /// <summary>
         /// 创建集群AI工作
@@ -48,7 +48,7 @@ namespace SR.ModRimWorld.FactionalWar
             var pawnList = PawnGroupMakerUtility.GeneratePawns(pawnGroupMakerParms).ToList();
             if (pawnList.Count == 0)
             {
-                Log.Error($"Got no pawns spawning raid from parms {parms}");
+                Log.Warning($"Got no pawns spawning raid from parms {parms}");
                 return pawnList;
             }
 

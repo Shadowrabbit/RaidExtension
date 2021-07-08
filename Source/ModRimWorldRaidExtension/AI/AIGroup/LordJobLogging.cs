@@ -30,7 +30,7 @@ namespace SR.ModRimWorld.FactionalWar
             //设置初始状态
             stateGraph.StartingToil = lordToilLogging;
             var faction = lord.faction;
-            //过渡 偷猎到带着猎物离开
+            //过渡 伐木到带着木材离开
             var transitionLoggingToTakeWoodExit = new Transition(lordToilLogging, lordToilTakeWoodExit);
             var triggerTicksPassed = new Trigger_TicksPassed(ExitTime.RandomInRange);
             transitionLoggingToTakeWoodExit.AddTrigger(triggerTicksPassed);

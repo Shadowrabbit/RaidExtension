@@ -17,6 +17,9 @@ namespace SR.ModRimWorld.FactionalWar
     [UsedImplicitly]
     public class IncidentWorkerPoaching : IncidentWorker_RaidEnemy
     {
+        private const float MinTargetRequireHealthScale = 1.7f; //健康缩放最小需求 用来判断动物强度
+        private const int ThreatPoints = 1000; //袭击点数
+
         /// <summary>
         /// 是否可以生成事件
         /// </summary>
@@ -27,6 +30,19 @@ namespace SR.ModRimWorld.FactionalWar
             if (!(parms.target is Map map))
             {
                 Log.Error("target must be a map.");
+                return false;
+            }
+
+
+            bool SpoilValidator(Thing t) => t is Pawn animal && animal.RaceProps.Animal && !animal.Downed &&
+                                            !animal.Dead && animal.RaceProps.baseHealthScale >=
+                                            MinTargetRequireHealthScale;
+
+            var isAnimalTargetExist = Enumerable.Any(map.mapPawns.AllPawnsSpawned, SpoilValidator);
+
+            //目标动物不存在 无法触发事件
+            if (!isAnimalTargetExist)
+            {
                 return false;
             }
 
@@ -46,6 +62,15 @@ namespace SR.ModRimWorld.FactionalWar
         protected override bool FactionCanBeGroupSource(Faction f, Map map, bool desperate = false)
         {
             return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction;
+        }
+
+        /// <summary>
+        /// 袭击点数
+        /// </summary>
+        /// <param name="parms"></param>
+        protected override void ResolveRaidPoints(IncidentParms parms)
+        {
+            parms.points = ThreatPoints;
         }
 
         /// <summary>

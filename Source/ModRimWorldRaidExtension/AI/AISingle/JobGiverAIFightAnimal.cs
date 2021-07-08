@@ -65,6 +65,7 @@ namespace SR.ModRimWorld.FactionalWar
             var flag2 = attackVerb.CanHitTarget(enemyTarget);
             var flag3 = (pawn.Position - enemyTarget.Position).LengthHorizontalSquared < 25;
             var num2 = flag1 ? 1 : 0;
+            //适合攻击
             if ((num1 & num2 & (flag2 ? 1 : 0)) != 0 || flag3 & flag2)
             {
                 return MakeRangeAttackJob(enemyTarget, attackVerb);
