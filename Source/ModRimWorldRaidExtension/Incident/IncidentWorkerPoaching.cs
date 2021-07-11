@@ -31,7 +31,7 @@ namespace SR.ModRimWorld.RaidExtension
         {
             if (!(parms.target is Map map))
             {
-                Log.Error("target must be a map.");
+                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
                 return false;
             }
 
@@ -45,6 +45,7 @@ namespace SR.ModRimWorld.RaidExtension
             //目标动物不存在 无法触发事件
             if (!isAnimalTargetExist)
             {
+                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
                 return false;
             }
 
@@ -78,7 +79,7 @@ namespace SR.ModRimWorld.RaidExtension
             //处理袭击派系
             if (!TryResolveRaidFaction(parms))
             {
-                Log.Warning("cant find raid factions");
+                Log.Warning("[SR.ModRimWorld.RaidExtension]cant find raid factions");
                 return false;
             }
 
@@ -93,7 +94,7 @@ namespace SR.ModRimWorld.RaidExtension
             //尝试解决袭击召唤中心
             if (!parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms))
             {
-                Log.Warning($"cant resolve raid spawn center: {parms}");
+                Log.Warning($"[SR.ModRimWorld.RaidExtension]cant resolve raid spawn center: {parms}");
                 return false;
             }
 
@@ -101,7 +102,7 @@ namespace SR.ModRimWorld.RaidExtension
             var pawnList = parms.raidStrategy.Worker.SpawnThreats(parms);
             if (pawnList.Count == 0)
             {
-                Log.Warning($"Got no pawns spawning raid from parms {parms}");
+                Log.Warning($"[SR.ModRimWorld.RaidExtension]Got no pawns spawning raid from parms {parms}");
                 return false;
             }
 
@@ -112,7 +113,7 @@ namespace SR.ModRimWorld.RaidExtension
             //设置集群AI
             if (!(parms.raidStrategy.Worker is RaidStrategyWorkerPoaching raidStrategyWorkerPoaching))
             {
-                Log.Error("strategy must be RaidStrategyWorkerPoaching");
+                Log.Error("[SR.ModRimWorld.RaidExtension]strategy must be RaidStrategyWorkerPoaching");
                 return false;
             }
 

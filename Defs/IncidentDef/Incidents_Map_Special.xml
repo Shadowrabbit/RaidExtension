@@ -19,6 +19,30 @@
             <li>Map_PlayerHome</li>
         </targetTags>
         <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerLogging</workerClass>
+        <category>ThreatBig</category>
+        <baseChance>4</baseChance>
+        <pointsScaleable>true</pointsScaleable>
+        <requireColonistsPresent>false</requireColonistsPresent>
+    </IncidentDef>
+    <IncidentDef>
+        <defName>SrHositleTraveler</defName>
+        <label>迷路的袭击者</label>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraveler</workerClass>
+        <category>FactionArrival</category>
+        <baseChance>4</baseChance>
+        <pointsScaleable>true</pointsScaleable>
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+    <IncidentDef>
+        <defName>SrHositleCaravanPassing</defName>
+        <label>敌对派系商队经过</label>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraderCaravanPassing</workerClass>
         <category>ThreatSmall</category>
         <baseChance>4</baseChance>
         <pointsScaleable>true</pointsScaleable>

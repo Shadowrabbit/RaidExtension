@@ -47,6 +47,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="AI\AIGroup\DutyDefOf.cs" />
+        <Compile Include="AI\AIGroup\LordJobHositleTraderCaravanTravelAndExit.cs" />
         <Compile Include="AI\AIGroup\LordJobLogging.cs" />
         <Compile Include="AI\AIGroup\LordJobPoaching.cs" />
         <Compile Include="AI\AIGroup\LordJobSiegeBase.cs" />
@@ -62,6 +63,8 @@
         <Compile Include="AI\AISingle\JobGiverTakeWoodExit.cs" />
         <Compile Include="DefOf\JobDefOf.cs" />
         <Compile Include="Extension\Pawn\PawnExtension.cs" />
+        <Compile Include="Incident\IncidentWorkerHositleTraderCaravanPassing.cs" />
+        <Compile Include="Incident\IncidentWorkerHositleTraveler.cs" />
         <Compile Include="Incident\IncidentWorkerLogging.cs" />
         <Compile Include="Incident\IncidentWorkerPoaching.cs" />
         <Compile Include="Incident\RaidStrategyDefOf.cs" />

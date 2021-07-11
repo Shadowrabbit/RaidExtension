@@ -28,7 +28,18 @@ namespace SR.ModRimWorld.RaidExtension
         {
             if (!(parms.target is Map map))
             {
-                Log.Error("target must be a map.");
+                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
+                return false;
+            }
+
+            bool SpoilValidator(Thing t) => t is Plant plant && !plant.IsBurning() && plant.HarvestableNow
+                                            && plant.def.plant.IsTree;
+
+            var isTreeExist = map.spawnedThings.Any(SpoilValidator);
+            //没有树 无法触发事件
+            if (!isTreeExist)
+            {
+                Log.Warning("[SR.ModRimWorld.RaidExtension]there is no tree.");
                 return false;
             }
 
@@ -78,7 +89,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override LetterDef GetLetterDef()
         {
-            return LetterDefOf.ThreatSmall;
+            return LetterDefOf.ThreatBig;
         }
     }
 }
