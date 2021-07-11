@@ -7,10 +7,20 @@
 //    *(__\_\        @Copyright  Copyright (c) 2021, Shadowrabbit
 // ******************************************************************
 
-namespace SR.ModRimWorld.FactionalWar
+using JetBrains.Annotations;
+using RimWorld;
+using Verse;
+using Verse.AI;
+
+namespace SR.ModRimWorld.RaidExtension
 {
-    public class JobGiverLogging
+    [UsedImplicitly]
+    public class JobGiverLogging : ThinkNode_JobGiver
     {
-        
+        protected override Job TryGiveJob(Pawn pawn)
+        {
+            var tree = pawn.FindTree();
+            return tree == null ? null : JobMaker.MakeJob(RimWorld.JobDefOf.CutPlant, tree);
+        }
     }
 }

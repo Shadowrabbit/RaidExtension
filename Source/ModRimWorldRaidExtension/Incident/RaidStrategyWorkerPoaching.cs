@@ -14,7 +14,7 @@ using RimWorld;
 using Verse;
 using Verse.AI.Group;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
     public class RaidStrategyWorkerPoaching : RaidStrategyWorker

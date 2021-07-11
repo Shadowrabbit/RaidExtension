@@ -11,11 +11,11 @@ using RimWorld;
 using Verse;
 using Verse.AI.Group;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     public class LordJobLogging : LordJob
     {
-        private static readonly IntRange ExitTime = new IntRange(13000, 19000); //离开时间
+        private static readonly IntRange ExitTime = new IntRange(3000, 5000); //离开时间
 
         public override StateGraph CreateGraph()
         {

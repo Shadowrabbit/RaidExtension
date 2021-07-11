@@ -9,7 +9,7 @@
                     <targetAcquireRadius>35</targetAcquireRadius>
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
-                <!--                砍树-->
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverLogging"/>
             </subNodes>
         </thinkNode>
     </DutyDef>
@@ -23,7 +23,7 @@
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
                 <li Class="JobGiver_SelfTend"/>
-                <!--                带走木材-->
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakeWoodExit"/>
                 <li Class="JobGiver_ExitMapBest">
                     <defaultLocomotion>Jog</defaultLocomotion>
                     <jobMaxDuration>500</jobMaxDuration>
@@ -42,7 +42,7 @@
                     <targetAcquireRadius>35</targetAcquireRadius>
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
-                <li Class="SR.ModRimWorld.FactionalWar.JobGiverAIFightAnimal"/>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverAIFightAnimal"/>
             </subNodes>
         </thinkNode>
     </DutyDef>
@@ -56,7 +56,7 @@
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
                 <li Class="JobGiver_SelfTend"/>
-                <li Class="SR.ModRimWorld.FactionalWar.JobGiverTakePreyExit"/>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakePreyExit"/>
                 <li Class="JobGiver_ExitMapBest">
                     <defaultLocomotion>Jog</defaultLocomotion>
                     <jobMaxDuration>500</jobMaxDuration>

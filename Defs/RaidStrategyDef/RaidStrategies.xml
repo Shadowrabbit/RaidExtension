@@ -3,7 +3,7 @@
     <!--伐木-->
     <RaidStrategyDef>
         <defName>SrLogging</defName>
-        <workerClass>SR.ModRimworld.FactionalWar.RaidStrategyWorkerLogging</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.RaidStrategyWorkerLogging</workerClass>
         <selectionWeightPerPointsCurve>
             <points>
                 <li>(100,0.4)</li>
@@ -24,7 +24,7 @@
     <!--偷猎-->
     <RaidStrategyDef>
         <defName>SrPoaching</defName>
-        <workerClass>SR.ModRimworld.FactionalWar.RaidStrategyWorkerPoaching</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.RaidStrategyWorkerPoaching</workerClass>
         <selectionWeightPerPointsCurve>
             <points>
                 <li>(100,0.4)</li>

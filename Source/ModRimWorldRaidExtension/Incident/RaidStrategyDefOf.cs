@@ -10,7 +10,7 @@
 using JetBrains.Annotations;
 using RimWorld;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [DefOf]
     public static class RaidStrategyDefOf

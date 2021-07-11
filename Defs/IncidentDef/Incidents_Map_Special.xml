@@ -6,7 +6,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>SR.ModRimworld.FactionalWar.IncidentWorkerPoaching</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerPoaching</workerClass>
         <category>ThreatSmall</category>
         <baseChance>4</baseChance>
         <pointsScaleable>true</pointsScaleable>
@@ -18,7 +18,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>SR.ModRimworld.FactionalWar.IncidentWorkerLogging</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerLogging</workerClass>
         <category>ThreatSmall</category>
         <baseChance>4</baseChance>
         <pointsScaleable>true</pointsScaleable>

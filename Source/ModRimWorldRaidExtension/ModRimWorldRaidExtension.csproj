@@ -54,10 +54,13 @@
         <Compile Include="AI\AIGroup\LordToilTakePreyExit.cs" />
         <Compile Include="AI\AIGroup\LordToilTakeWoodExit.cs" />
         <Compile Include="AI\AIGroup\TriggerTargetAnimalDowned.cs" />
+        <Compile Include="AI\AISingle\JobDriverTakeWoodExit.cs" />
         <Compile Include="AI\AISingle\JobGiverAIFightAnimal.cs" />
         <Compile Include="AI\AISingle\JobGiverLogging.cs" />
         <Compile Include="AI\AISingle\JobGiverTakePreyExit.cs" />
         <Compile Include="AI\AISingle\JobGiverTakeWoodExit.cs" />
+        <Compile Include="DefOf\JobDefOf.cs" />
+        <Compile Include="Extension\Pawn\PawnExtension.cs" />
         <Compile Include="Incident\IncidentWorkerLogging.cs" />
         <Compile Include="Incident\IncidentWorkerPoaching.cs" />
         <Compile Include="Incident\RaidStrategyDefOf.cs" />

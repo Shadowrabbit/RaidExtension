@@ -13,7 +13,7 @@ using Verse;
 using Verse.AI;
 using Verse.AI.Group;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
     public class JobGiverAIFightAnimal : JobGiver_AIFightEnemies

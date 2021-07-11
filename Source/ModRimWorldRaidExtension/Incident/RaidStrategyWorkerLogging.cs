@@ -13,10 +13,10 @@ using RimWorld;
 using Verse;
 using Verse.AI.Group;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
-    public class RaidStrategyWorkerLogging : RaidStrategyWorkerPoaching
+    public class RaidStrategyWorkerLogging : RaidStrategyWorker
     {
         /// <summary>
         /// 创建集群AI工作

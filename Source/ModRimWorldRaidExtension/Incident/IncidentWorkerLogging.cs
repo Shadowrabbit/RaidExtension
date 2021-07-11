@@ -12,12 +12,12 @@ using JetBrains.Annotations;
 using RimWorld;
 using Verse;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
     public class IncidentWorkerLogging : IncidentWorker_RaidEnemy
     {
-        private const int ThreatPoints = 1000; //袭击点数
+        private const int MaxThreatPoints = 3000; //袭击点数
 
         /// <summary>
         /// 是否可以生成事件
@@ -56,9 +56,12 @@ namespace SR.ModRimWorld.FactionalWar
         /// <param name="parms"></param>
         protected override void ResolveRaidPoints(IncidentParms parms)
         {
-            parms.points = ThreatPoints;
+            if (parms.points > MaxThreatPoints)
+            {
+                parms.points = MaxThreatPoints;
+            }
         }
-        
+
         /// <summary>
         /// 解决突袭策略
         /// </summary>

@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 using RimWorld;
 using Verse.AI;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [DefOf]
     public static class DutyDefOf

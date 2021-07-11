@@ -15,7 +15,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace SR.ModRimWorld.FactionalWar
+namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
     public class IncidentWorkerPoaching : IncidentWorker_RaidEnemy
@@ -82,6 +82,7 @@ namespace SR.ModRimWorld.FactionalWar
                 Log.Warning("cant find raid factions");
                 return false;
             }
+
             //角色组定义 战斗
             var combat = PawnGroupKindDefOf.Combat;
             //处理袭击策略
@@ -96,6 +97,7 @@ namespace SR.ModRimWorld.FactionalWar
                 Log.Warning($"cant resolve raid spawn center: {parms}");
                 return false;
             }
+
             //生成派系部队
             var pawnList = parms.raidStrategy.Worker.SpawnThreats(parms);
             if (pawnList.Count == 0)
@@ -103,6 +105,7 @@ namespace SR.ModRimWorld.FactionalWar
                 Log.Warning($"Got no pawns spawning raid from parms {parms}");
                 return false;
             }
+
             //战利品生成
             GenerateRaidLoot(parms, parms.points, pawnList);
             //解决信件
@@ -115,7 +118,7 @@ namespace SR.ModRimWorld.FactionalWar
             }
 
             //设置狩猎目标
-            var animal = FindTargetAnimal(pawnList[0]);
+            var animal = pawnList[0].FindTargetAnimal(MinTargetRequireHealthScale);
             raidStrategyWorkerPoaching.TempAnimal = animal;
             raidStrategyWorkerPoaching.MakeLords(parms, pawnList);
             //袭击时设置一倍速
@@ -160,32 +163,12 @@ namespace SR.ModRimWorld.FactionalWar
         /// <param name="pawnList"></param>
         protected virtual void ResolveLetter(IncidentParms parms, List<Pawn> pawnList)
         {
-            var letterLabel = (TaggedString)GetLetterLabel(parms);
-            var letterText = (TaggedString)GetLetterText(parms, pawnList);
+            var letterLabel = (TaggedString) GetLetterLabel(parms);
+            var letterText = (TaggedString) GetLetterText(parms, pawnList);
             PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter(pawnList, ref letterLabel, ref letterText,
                 GetRelatedPawnsInfoLetterText(parms), true);
             SendStandardLetter(letterLabel, letterText, GetLetterDef(), parms, pawnList,
                 Array.Empty<NamedArgument>());
-        }
-
-        /// <summary>
-        /// 寻找猎物
-        /// </summary>
-        /// <param name="leader">集群AI的队长</param>
-        /// <returns></returns>
-        private static Pawn FindTargetAnimal(Thing leader)
-        {
-            //验证器
-            bool SpoilValidator(Thing t) => (t is Pawn animal)
-                                            && animal.RaceProps.Animal && !animal.Downed && !animal.Dead &&
-                                            animal.RaceProps.baseHealthScale >= MinTargetRequireHealthScale;
-
-            //找队长身边最近的动物
-            var targetThing = GenClosest.ClosestThing_Global_Reachable(leader.Position, leader.Map,
-                leader.Map.mapPawns.AllPawnsSpawned, PathEndMode.ClosestTouch,
-                TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some), validator: SpoilValidator);
-
-            return (Pawn)targetThing;
         }
     }
 }
