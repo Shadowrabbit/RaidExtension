@@ -49,6 +49,7 @@
         <Compile Include="AI\AIGroup\DutyDefOf.cs" />
         <Compile Include="AI\AIGroup\LordJobLogging.cs" />
         <Compile Include="AI\AIGroup\LordJobPoaching.cs" />
+        <Compile Include="AI\AIGroup\LordJobSiegeBase.cs" />
         <Compile Include="AI\AIGroup\LordToilLogging.cs" />
         <Compile Include="AI\AIGroup\LordToilPoaching.cs" />
         <Compile Include="AI\AIGroup\LordToilTakePreyExit.cs" />

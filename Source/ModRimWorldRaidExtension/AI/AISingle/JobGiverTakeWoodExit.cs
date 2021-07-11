@@ -21,6 +21,7 @@ namespace SR.ModRimWorld.RaidExtension
         private const float MaxSearchDistence = 50f; //最大触发距离
         private const int MinRegions = 0xF;
         private const int MaxRegions = 0xF;
+        private const float StackRadius = 40f; //堆叠搜索半径
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -51,7 +52,8 @@ namespace SR.ModRimWorld.RaidExtension
             job.count = Mathf.Min(spoils.stackCount,
                 (int) (pawn.GetStatValue(StatDefOf.CarryingCapacity) / spoils.def.VolumePerUnit));
             //附近其他可堆叠的木材 一起带走
-            foreach (var otherSpoils in GenRadial.RadialDistinctThingsAround(spoils.Position, spoils.Map, 20f, true))
+            foreach (var otherSpoils in GenRadial.RadialDistinctThingsAround(spoils.Position, spoils.Map, StackRadius,
+                true))
             {
                 //其他战利品也是木材 并且不是当前准备搬运的 并且可以保留
                 if (otherSpoils?.def == spoils.def && otherSpoils != spoils && pawn.CanReserve(otherSpoils))

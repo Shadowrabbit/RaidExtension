@@ -28,7 +28,10 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override LordJob MakeLordJob(IncidentParms parms, Map map, List<Pawn> pawns, int raidSeed)
         {
-            return new LordJobLogging();
+            var siegePositionFrom =
+                RCellFinder.FindSiegePositionFrom(parms.spawnCenter.IsValid ? parms.spawnCenter : pawns[0].PositionHeld,
+                    map);
+            return new LordJobLogging(siegePositionFrom);
         }
     }
 }

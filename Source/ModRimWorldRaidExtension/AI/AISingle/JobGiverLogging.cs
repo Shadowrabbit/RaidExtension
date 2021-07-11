@@ -8,7 +8,6 @@
 // ******************************************************************
 
 using JetBrains.Annotations;
-using RimWorld;
 using Verse;
 using Verse.AI;
 
