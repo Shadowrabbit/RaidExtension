@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    <SrLogging.letterLabelEnemy>Logging</SrLogging.letterLabelEnemy>
+    <SrLogging.arrivalTextEnemy>They plan to log wood nearby.</SrLogging.arrivalTextEnemy>
+    <SrPoaching.letterLabelEnemy>Poaching</SrPoaching.letterLabelEnemy>
+    <SrPoaching.arrivalTextEnemy>They plan to poach nearby.</SrPoaching.arrivalTextEnemy>
+</LanguageData>
