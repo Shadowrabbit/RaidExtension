@@ -8,7 +8,7 @@
         </targetTags>
         <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerPoaching</workerClass>
         <category>ThreatSmall</category>
-        <baseChance>4</baseChance>
+        <baseChance>0.8</baseChance>
         <pointsScaleable>true</pointsScaleable>
         <requireColonistsPresent>false</requireColonistsPresent>
     </IncidentDef>
@@ -19,8 +19,8 @@
             <li>Map_PlayerHome</li>
         </targetTags>
         <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerLogging</workerClass>
-        <category>ThreatBig</category>
-        <baseChance>4</baseChance>
+        <category>ThreatSmall</category>
+        <baseChance>0.8</baseChance>
         <pointsScaleable>true</pointsScaleable>
         <requireColonistsPresent>false</requireColonistsPresent>
     </IncidentDef>
@@ -31,8 +31,8 @@
             <li>Map_PlayerHome</li>
         </targetTags>
         <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraveler</workerClass>
-        <category>FactionArrival</category>
-        <baseChance>4</baseChance>
+        <category>Misc</category>
+        <baseChance>1</baseChance>
         <pointsScaleable>true</pointsScaleable>
         <requireColonistsPresent>True</requireColonistsPresent>
     </IncidentDef>
@@ -43,8 +43,8 @@
             <li>Map_PlayerHome</li>
         </targetTags>
         <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraderCaravanPassing</workerClass>
-        <category>ThreatSmall</category>
-        <baseChance>4</baseChance>
+        <category>Misc</category>
+        <baseChance>1</baseChance>
         <pointsScaleable>true</pointsScaleable>
         <requireColonistsPresent>false</requireColonistsPresent>
     </IncidentDef>
