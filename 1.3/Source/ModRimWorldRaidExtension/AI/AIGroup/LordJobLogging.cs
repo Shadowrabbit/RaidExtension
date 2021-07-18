@@ -15,8 +15,8 @@ namespace SR.ModRimWorld.RaidExtension
 {
     public class LordJobLogging : LordJobSiegeBase
     {
-        private const int ExitTime = 1500; //离开时间
-        private static readonly IntRange WaitTime = new IntRange(500, 1000); //集合等待时间
+        private const int ExitTime = 2000; //离开时间
+        private const int WaitTime = 500; //集合等待时间
 
         public LordJobLogging()
         {
@@ -42,7 +42,7 @@ namespace SR.ModRimWorld.RaidExtension
             var faction = lord.faction;
             //过渡 集合到开始伐木
             var transition = new Transition(lordToilStage, lordToilLogging);
-            transition.AddTrigger(new Trigger_TicksPassed(WaitTime.RandomInRange));
+            transition.AddTrigger(new Trigger_TicksPassed(WaitTime));
             //唤醒成员
             transition.AddPostAction(new TransitionAction_WakeAll());
             stateGraph.AddTransition(transition);
