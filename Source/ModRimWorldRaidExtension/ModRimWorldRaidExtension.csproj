@@ -55,7 +55,7 @@
         <Compile Include="AI\AIGroup\LordToilPoaching.cs" />
         <Compile Include="AI\AIGroup\LordToilTakePreyExit.cs" />
         <Compile Include="AI\AIGroup\LordToilTakeWoodExit.cs" />
-        <Compile Include="AI\AIGroup\TriggerTargetAnimalDowned.cs" />
+        <Compile Include="AI\AIGroup\TriggerTargetAnimalDead.cs" />
         <Compile Include="AI\AISingle\JobDriverTakeWoodExit.cs" />
         <Compile Include="AI\AISingle\JobGiverAIFightAnimal.cs" />
         <Compile Include="AI\AISingle\JobGiverLogging.cs" />

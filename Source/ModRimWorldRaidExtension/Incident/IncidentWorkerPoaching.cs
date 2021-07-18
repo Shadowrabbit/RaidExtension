@@ -19,8 +19,9 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class IncidentWorkerPoaching : IncidentWorker_RaidEnemy
     {
-        private const float MinTargetRequireHealthScale = 1.7f; //健康缩放最小需求 用来判断动物强度
-        private const int ThreatPoints = 1000; //袭击点数
+        private const float MinTargetRequireHealthScale = 1.2f; //健康缩放最小需求 用来判断动物强度
+        private const int MaxThreatPoints = 3000; //最大袭击点数
+        private const int MinThreatPoints = 800; //最小袭击点数
 
         /// <summary>
         /// 是否可以生成事件
@@ -36,7 +37,7 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
 
-            bool SpoilValidator(Thing t) => t is Pawn animal && animal.RaceProps.Animal && !animal.Downed &&
+            bool SpoilValidator(Thing t) => t is Pawn animal && animal.RaceProps.Animal &&
                                             !animal.Dead && animal.RaceProps.baseHealthScale >=
                                             MinTargetRequireHealthScale;
 
@@ -51,7 +52,6 @@ namespace SR.ModRimWorld.RaidExtension
 
             //候选派系列表
             var candidateFactionList = CandidateFactions(map).ToList();
-
             return Enumerable.Any(candidateFactionList, faction => faction.HostileTo(Faction.OfPlayer));
         }
 
@@ -105,9 +105,7 @@ namespace SR.ModRimWorld.RaidExtension
                 Log.Warning($"[SR.ModRimWorld.RaidExtension]Got no pawns spawning raid from parms {parms}");
                 return false;
             }
-
-            //战利品生成
-            GenerateRaidLoot(parms, parms.points, pawnList);
+            
             //解决信件
             ResolveLetter(parms, pawnList);
             //设置集群AI
@@ -144,7 +142,15 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="parms"></param>
         protected override void ResolveRaidPoints(IncidentParms parms)
         {
-            parms.points = ThreatPoints;
+            if (parms.points > MaxThreatPoints)
+            {
+                parms.points = MaxThreatPoints;
+            }
+
+            if (parms.points < MinThreatPoints)
+            {
+                parms.points = MinThreatPoints;
+            }
         }
 
         /// <summary>

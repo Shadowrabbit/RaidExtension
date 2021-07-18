@@ -45,7 +45,6 @@ namespace SR.ModRimWorld.RaidExtension
 
             //候选派系列表
             var candidateFactionList = CandidateFactions(map).ToList();
-
             return Enumerable.Any(candidateFactionList, faction => faction.HostileTo(Faction.OfPlayer));
         }
 
@@ -89,7 +88,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override LetterDef GetLetterDef()
         {
-            return LetterDefOf.ThreatBig;
+            return LetterDefOf.ThreatSmall;
         }
     }
 }

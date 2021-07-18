@@ -22,7 +22,6 @@
                     <targetAcquireRadius>35</targetAcquireRadius>
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
-                <li Class="JobGiver_SelfTend"/>
                 <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakeWoodExit"/>
                 <li Class="JobGiver_ExitMapBest">
                     <defaultLocomotion>Jog</defaultLocomotion>
@@ -39,10 +38,16 @@
         <thinkNode Class="ThinkNode_Priority">
             <subNodes>
                 <li Class="JobGiver_AIFightEnemies">
-                    <targetAcquireRadius>35</targetAcquireRadius>
-                    <targetKeepRadius>40</targetKeepRadius>
+                    <targetAcquireRadius>18</targetAcquireRadius>
+                    <targetKeepRadius>20</targetKeepRadius>
                 </li>
-                <li Class="SR.ModRimWorld.RaidExtension.JobGiverAIFightAnimal"/>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverAIFightAnimal">
+                    <targetAcquireRadius>18</targetAcquireRadius>
+                    <targetKeepRadius>20</targetKeepRadius>
+                </li>
+                <li Class="JobGiver_AISapper">
+                    <canMineNonMineables>false</canMineNonMineables>
+                </li>
             </subNodes>
         </thinkNode>
     </DutyDef>
@@ -55,7 +60,6 @@
                     <targetAcquireRadius>35</targetAcquireRadius>
                     <targetKeepRadius>40</targetKeepRadius>
                 </li>
-                <li Class="JobGiver_SelfTend"/>
                 <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakePreyExit"/>
                 <li Class="JobGiver_ExitMapBest">
                     <defaultLocomotion>Jog</defaultLocomotion>

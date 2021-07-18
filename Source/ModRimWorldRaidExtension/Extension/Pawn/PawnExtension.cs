@@ -23,12 +23,13 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="leader"></param>
         /// <param name="minTargetRequireHealthScale"></param>
         /// <returns></returns>
-        public static Pawn FindTargetAnimal(this Thing leader, float minTargetRequireHealthScale)
+        public static Pawn FindTargetAnimal(this Pawn leader, float minTargetRequireHealthScale)
         {
             //验证器
             bool SpoilValidator(Thing t) => (t is Pawn animal)
-                                            && animal.RaceProps.Animal && !animal.Downed && !animal.Dead &&
-                                            animal.RaceProps.baseHealthScale >= minTargetRequireHealthScale;
+                                            && animal.RaceProps.Animal && !animal.Dead &&
+                                            animal.RaceProps.baseHealthScale >= minTargetRequireHealthScale
+                                            && leader.CanReserve(t);
 
             //找队长身边最近的动物
             var targetThing = GenClosest.ClosestThing_Global_Reachable(leader.Position, leader.Map,
@@ -64,13 +65,11 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="root"></param>
         /// <param name="map"></param>
         /// <param name="maxDist"></param>
-        /// <param name="minRegion"></param>
-        /// <param name="maxRegion"></param>
         /// <param name="disallowed"></param>
         /// <param name="validator"></param>
         /// <returns></returns>
         public static Thing TryFindBestSpoilsToTake(this Pawn seacher, IntVec3 root, Map map, float maxDist,
-            int minRegion, int maxRegion, ICollection<Thing> disallowed = null, Predicate<Thing> validator = null)
+            ICollection<Thing> disallowed = null, Predicate<Thing> validator = null)
         {
             if (map == null)
             {
@@ -84,22 +83,22 @@ namespace SR.ModRimWorld.RaidExtension
 
             //搜索者存在 但无法触碰地图边界 或者 搜索者不存在
             if (seacher != null && !map.reachability.CanReachMapEdge(seacher.Position,
-                TraverseParms.For(seacher, Danger.Some)) || (seacher == null && !map.reachability.CanReachMapEdge(root,
-                TraverseParms.For(TraverseMode.PassDoors, Danger.Some))))
+                TraverseParms.For(seacher)) || (seacher == null && !map.reachability.CanReachMapEdge(root,
+                TraverseParms.For(TraverseMode.PassDoors))))
             {
                 return null;
             }
 
-            //验证器 搜索者不存在 或者搜索者可以预留当前物体 并且没有禁用 并且物体可以被偷 并且物体没在燃烧中 并且物品周围有敌对派系尸体
+            //验证器 搜索者不存在 或者搜索者可以预留当前物体 并且没有禁用 并且物体可以被偷 并且物品周围有敌对派系尸体
             bool SpoilValidator(Thing t) => (seacher == null || seacher.CanReserve(t)) &&
-                                            (disallowed == null || !disallowed.Contains(t)) && t.def.stealable &&
-                                            !t.IsBurning() && (validator == null || validator(t));
+                                            (disallowed == null || !disallowed.Contains(t)) &&
+                                            (validator == null || validator(t));
 
 
             return GenClosest.ClosestThing_Regionwise_ReachablePrioritized(root, map,
                 ThingRequest.ForGroup(ThingRequestGroup.HaulableEverOrMinifiable), PathEndMode.ClosestTouch,
-                TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some), maxDist, SpoilValidator,
-                StealAIUtility.GetValue, minRegion, maxRegion);
+                TraverseParms.For(TraverseMode.NoPassClosedDoors), maxDist, SpoilValidator,
+                StealAIUtility.GetValue);
         }
     }
 }

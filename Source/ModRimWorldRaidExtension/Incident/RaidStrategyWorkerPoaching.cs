@@ -19,8 +19,6 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class RaidStrategyWorkerPoaching : RaidStrategyWorker
     {
-        private const int MaxPawnCount = 6; //最大生成角色数量
-        private const int MinPawnCount = 3; //最小生成角色数量
         public Pawn TempAnimal { get; set; } //目标动物
 
         /// <summary>
@@ -46,22 +44,12 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         public override List<Pawn> SpawnThreats(IncidentParms parms)
         {
-            var pawnCount = new IntRange(MinPawnCount, MaxPawnCount).RandomInRange;
             var pawnGroupMakerParms =
                 IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, parms);
             var pawnList = PawnGroupMakerUtility.GeneratePawns(pawnGroupMakerParms).ToList();
             if (pawnList.Count == 0)
             {
                 return pawnList;
-            }
-
-            //删掉多余的数量
-            if (pawnList.Count > pawnCount)
-            {
-                for (var i = pawnList.Count - 1; i > pawnCount; i--)
-                {
-                    pawnList.RemoveAt(i);
-                }
             }
 
             parms.raidArrivalMode.Worker.Arrive(pawnList, parms);

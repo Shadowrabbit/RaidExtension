@@ -18,9 +18,7 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class JobGiverTakePreyExit : ThinkNode_JobGiver
     {
-        private const float MaxSearchDistence = 50f; //最大触发距离
-        private const int MinRegions = 0xF;
-        private const int MaxRegions = 0xF;
+        private const float MaxSearchDistence = 99f; //最大触发距离
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -31,13 +29,13 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             //验证器 搜索者不存在 或者搜索者可以预留当前物体 并且没有禁用 并且物体可以被偷 并且物体没在燃烧中 并且物品周围有敌对派系尸体
-            bool Validator(Thing t) => t is Pawn pawnAnimal && (pawnAnimal.Downed || pawnAnimal.Dead) ||
-                                       t is Corpse corpseAnimal && corpseAnimal.IngestibleNow;
+            bool Validator(Thing t) => t is Corpse corpseAnimal && corpseAnimal.InnerPawn.RaceProps != null &&
+                                       corpseAnimal.InnerPawn.RaceProps.IsFlesh &&
+                                       corpseAnimal.InnerPawn.RaceProps.Animal;
 
             //寻找身边合适的战利品
-            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDistence, MinRegions,
-                MaxRegions, null, Validator);
-            if (spoils == null || GenAI.InDangerousCombat(pawn))
+            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDistence, null, Validator);
+            if (spoils == null)
             {
                 return null;
             }

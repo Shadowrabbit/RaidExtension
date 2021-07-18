@@ -17,7 +17,12 @@ namespace SR.ModRimWorld.RaidExtension
     {
         private static readonly IntRange WaitTime = new IntRange(500, 1000); //集合等待时间
         private Pawn _targetAnimal; //集群AI想要猎杀的动物
-        public Pawn TargetAnimal => _targetAnimal;
+
+        public Pawn TargetAnimal
+        {
+            get => _targetAnimal;
+            set => _targetAnimal = value;
+        }
 
         public LordJobPoaching()
         {
@@ -60,8 +65,8 @@ namespace SR.ModRimWorld.RaidExtension
             //过渡 偷猎到带着猎物离开
             var transitionPoachingToTakePreyExit = new Transition(lordToilPoaching, lordToilTakePreyExit);
             //触发条件 目标猎物被击倒
-            var triggerTargetAnimalDowned = new TriggerTargetAnimalDowned(_targetAnimal);
-            transitionPoachingToTakePreyExit.AddTrigger(triggerTargetAnimalDowned);
+            var triggerTargetAnimalDead = new TriggerTargetAnimalDead(_targetAnimal);
+            transitionPoachingToTakePreyExit.AddTrigger(triggerTargetAnimalDead);
             transitionPoachingToTakePreyExit.AddPreAction(new TransitionAction_Message(
                 "SrTakePreyExit".Translate(faction.def.pawnsPlural.CapitalizeFirst(),
                     faction.Name), MessageTypeDefOf.ThreatSmall));

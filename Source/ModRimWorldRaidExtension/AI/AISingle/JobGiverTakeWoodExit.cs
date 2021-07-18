@@ -19,8 +19,6 @@ namespace SR.ModRimWorld.RaidExtension
     public class JobGiverTakeWoodExit : ThinkNode_JobGiver
     {
         private const float MaxSearchDistence = 50f; //最大触发距离
-        private const int MinRegions = 0xF;
-        private const int MaxRegions = 0xF;
         private const float StackRadius = 40f; //堆叠搜索半径
 
         protected override Job TryGiveJob(Pawn pawn)
@@ -38,8 +36,7 @@ namespace SR.ModRimWorld.RaidExtension
                                        t.def.stuffProps.categories.Contains(StuffCategoryDefOf.Woody);
 
             //寻找身边合适的战利品
-            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDistence, MinRegions,
-                MaxRegions, null, Validator);
+            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDistence, null, Validator);
             //找不到
             if (spoils == null || GenAI.InDangerousCombat(pawn))
             {

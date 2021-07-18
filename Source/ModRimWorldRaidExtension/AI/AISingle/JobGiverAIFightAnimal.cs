@@ -50,12 +50,16 @@ namespace SR.ModRimWorld.RaidExtension
             //近战的情况
             if (attackVerb.verbProps.IsMeleeAttack)
             {
-                return MeleeAttackJob(enemyTarget);
+                var jobMeleeAttack = MeleeAttackJob(enemyTarget);
+                jobMeleeAttack.killIncappedTarget = true;
+                jobMeleeAttack.attackDoorIfTargetLost = true;
+                jobMeleeAttack.canBashDoors = true;
+                return jobMeleeAttack;
             }
 
             //远程的情况 先算当前位置适不适合攻击
-            var num1 = (double)CoverUtility.CalculateOverallBlockChance((LocalTargetInfo)pawn,
-                enemyTarget.Position, pawn.Map) > 0.00999999977648258
+            var num1 = (double) CoverUtility.CalculateOverallBlockChance((LocalTargetInfo) pawn,
+                enemyTarget.Position, pawn.Map) > 0.01
                 ? 1
                 : 0;
             var flag1 = pawn.Position.Standable(pawn.Map) &&
@@ -95,7 +99,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         public override ThinkNode DeepCopy(bool resolve = true)
         {
-            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal)base.DeepCopy(resolve);
+            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal) base.DeepCopy(resolve);
             return jobGiverAIFightHostileFaction;
         }
 
@@ -115,18 +119,14 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             //目标已无威胁
-            if (lordJobPoaching.TargetAnimal.Downed || lordJobPoaching.TargetAnimal.Dead)
+            if (lordJobPoaching.TargetAnimal.Dead ||
+                !lord.Map.listerThings.Contains(lordJobPoaching.TargetAnimal))
             {
                 return null;
             }
-            var animal = lordJobPoaching.TargetAnimal;
-            
+
             //无法保留
-            if (pawn != null && !pawn.CanReserve(animal))
-            {
-                return null;
-            }
-            return animal;
+            return !pawn.CanReserve(lordJobPoaching.TargetAnimal) ? null : lordJobPoaching.TargetAnimal;
         }
 
         /// <summary>
@@ -142,6 +142,9 @@ namespace SR.ModRimWorld.RaidExtension
             rangeAttackJob.targetA = enemyTarget;
             rangeAttackJob.endIfCantShootInMelee = true;
             rangeAttackJob.endIfCantShootTargetFromCurPos = true;
+            rangeAttackJob.killIncappedTarget = true;
+            rangeAttackJob.attackDoorIfTargetLost = true;
+            rangeAttackJob.canBashDoors = true;
             return rangeAttackJob;
         }
     }
