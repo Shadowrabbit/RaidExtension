@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!--伐木-->
+    <DutyDef>
+        <defName>SrLogging</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_AIFightEnemies">
+                    <targetAcquireRadius>35</targetAcquireRadius>
+                    <targetKeepRadius>40</targetKeepRadius>
+                </li>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverLogging"/>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <!--带着木材离开-->
+    <DutyDef>
+        <defName>SrTakeWoodExit</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_AIDefendSelf">
+                    <targetAcquireRadius>35</targetAcquireRadius>
+                    <targetKeepRadius>40</targetKeepRadius>
+                </li>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakeWoodExit"/>
+                <li Class="JobGiver_ExitMapBest">
+                    <defaultLocomotion>Jog</defaultLocomotion>
+                    <jobMaxDuration>500</jobMaxDuration>
+                    <forceCanDigIfAnyHostileActiveThreat>true</forceCanDigIfAnyHostileActiveThreat>
+                    <forceCanDigIfCantReachMapEdge>true</forceCanDigIfCantReachMapEdge>
+                </li>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <!--偷猎-->
+    <DutyDef>
+        <defName>SrPoaching</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_AIFightEnemies">
+                    <targetAcquireRadius>18</targetAcquireRadius>
+                    <targetKeepRadius>20</targetKeepRadius>
+                </li>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverAIFightAnimal">
+                    <targetAcquireRadius>18</targetAcquireRadius>
+                    <targetKeepRadius>20</targetKeepRadius>
+                </li>
+                <li Class="JobGiver_AISapper">
+                    <canMineNonMineables>false</canMineNonMineables>
+                </li>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <!--带着猎物离开-->
+    <DutyDef>
+        <defName>SrTakePreyExit</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_AIDefendSelf">
+                    <targetAcquireRadius>35</targetAcquireRadius>
+                    <targetKeepRadius>40</targetKeepRadius>
+                </li>
+                <li Class="SR.ModRimWorld.RaidExtension.JobGiverTakePreyExit"/>
+                <li Class="JobGiver_ExitMapBest">
+                    <defaultLocomotion>Jog</defaultLocomotion>
+                    <jobMaxDuration>500</jobMaxDuration>
+                    <forceCanDigIfAnyHostileActiveThreat>true</forceCanDigIfAnyHostileActiveThreat>
+                    <forceCanDigIfCantReachMapEdge>true</forceCanDigIfCantReachMapEdge>
+                </li>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+</Defs>
