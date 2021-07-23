@@ -32,8 +32,7 @@ namespace SR.ModRimWorld.RaidExtension
                 return false;
             }
 
-            bool SpoilValidator(Thing t) => t is Plant plant && !plant.IsBurning() && plant.HarvestableNow
-                                            && plant.IsTree();
+            bool SpoilValidator(Thing t) => t is Plant plant && !plant.IsBurning() && plant.IsTree();
 
             var isTreeExist = map.spawnedThings.Any(SpoilValidator);
             //没有树 无法触发事件
