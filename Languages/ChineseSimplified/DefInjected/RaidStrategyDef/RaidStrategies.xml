@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    <SrLogging.letterLabelEnemy>盗伐</SrLogging.letterLabelEnemy>
+    <SrLogging.arrivalTextEnemy>他们打算在附近伐木。</SrLogging.arrivalTextEnemy>
+    <SrPoaching.letterLabelEnemy>偷猎</SrPoaching.letterLabelEnemy>
+    <SrPoaching.arrivalTextEnemy>他们打算在附近捕猎。</SrPoaching.arrivalTextEnemy>
+</LanguageData>

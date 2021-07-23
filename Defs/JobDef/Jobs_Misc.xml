@@ -3,7 +3,7 @@
     <JobDef>
         <defName>SrTakeWoodExit</defName>
         <driverClass>SR.ModRimWorld.RaidExtension.JobDriverTakeWoodExit</driverClass>
-        <reportString>正在搬运木材</reportString>
+        <reportString>carrying wood</reportString>
         <casualInterruptible>false</casualInterruptible>
         <checkOverrideOnDamage>Never</checkOverrideOnDamage>
     </JobDef>

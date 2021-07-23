@@ -18,8 +18,8 @@
         <arriveModes>
             <li>EdgeWalkIn</li>
         </arriveModes>
-        <letterLabelEnemy>伐木</letterLabelEnemy>
-        <arrivalTextEnemy>他们打算在附近伐木。</arrivalTextEnemy>
+        <letterLabelEnemy>Logging</letterLabelEnemy>
+        <arrivalTextEnemy>They plan to log wood nearby.</arrivalTextEnemy>
     </RaidStrategyDef>
     <!--偷猎-->
     <RaidStrategyDef>
@@ -39,7 +39,7 @@
         <arriveModes>
             <li>EdgeWalkIn</li>
         </arriveModes>
-        <letterLabelEnemy>偷猎</letterLabelEnemy>
-        <arrivalTextEnemy>他们打算在附近偷猎。</arrivalTextEnemy>
+        <letterLabelEnemy>Poaching</letterLabelEnemy>
+        <arrivalTextEnemy>They plan to poach nearby.</arrivalTextEnemy>
     </RaidStrategyDef>
 </Defs>

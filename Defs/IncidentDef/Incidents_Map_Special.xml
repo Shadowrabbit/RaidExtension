@@ -2,7 +2,7 @@
 <Defs>
     <IncidentDef>
         <defName>SrPoaching</defName>
-        <label>偷猎</label>
+        <label>Poaching</label>
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
@@ -14,7 +14,7 @@
     </IncidentDef>
     <IncidentDef>
         <defName>SrLogging</defName>
-        <label>伐木</label>
+        <label>Logging</label>
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
@@ -26,7 +26,7 @@
     </IncidentDef>
     <IncidentDef>
         <defName>SrHositleTraveler</defName>
-        <label>迷路的袭击者</label>
+        <label>Lost Raider</label>
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
@@ -38,7 +38,7 @@
     </IncidentDef>
     <IncidentDef>
         <defName>SrHositleCaravanPassing</defName>
-        <label>敌对派系商队经过</label>
+        <label>Hositle Caravan Passing By</label>
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
