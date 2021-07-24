@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    <SrLogging.letterLabelEnemy>Exploitation du bois</SrLogging.letterLabelEnemy>
+    <SrLogging.arrivalTextEnemy>Ils prévoient de couper du bois à proximité.</SrLogging.arrivalTextEnemy>
+    <SrPoaching.letterLabelEnemy>Braconnage</SrPoaching.letterLabelEnemy>
+    <SrPoaching.arrivalTextEnemy>Ils prévoient de braconner à proximité.</SrPoaching.arrivalTextEnemy>
+</LanguageData>
