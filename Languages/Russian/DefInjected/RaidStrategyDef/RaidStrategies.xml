@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 伐木 -->
+
+  <SrLogging.arrivalTextEnemy>Они планируют вырубать лес поблизости.</SrLogging.arrivalTextEnemy>
+  <SrLogging.letterLabelEnemy>Вырубка леса</SrLogging.letterLabelEnemy>
+
+
+  <!-- 偷猎 -->
+
+  <SrPoaching.arrivalTextEnemy>Они планируют заняться браконьерством неподалеку.</SrPoaching.arrivalTextEnemy>
+  <SrPoaching.letterLabelEnemy>Браконьерство</SrPoaching.letterLabelEnemy>
+
+
+</LanguageData>
