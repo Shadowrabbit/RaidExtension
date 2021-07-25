@@ -118,15 +118,25 @@ namespace SR.ModRimWorld.RaidExtension
                 return null;
             }
 
+            var targetAnimal = lordJobPoaching.TargetAnimal;
+            if (targetAnimal == null)
+            {
+                return null;
+            }
+
+            if (lord.Map?.listerThings == null)
+            {
+                return null;
+            }
+
             //目标已无威胁
-            if (lordJobPoaching.TargetAnimal.Dead ||
-                !lord.Map.listerThings.Contains(lordJobPoaching.TargetAnimal))
+            if (targetAnimal.Dead || !lord.Map.listerThings.Contains(targetAnimal))
             {
                 return null;
             }
 
             //无法保留
-            return !pawn.CanReserve(lordJobPoaching.TargetAnimal) ? null : lordJobPoaching.TargetAnimal;
+            return !pawn.CanReserve(targetAnimal) ? null : targetAnimal;
         }
 
         /// <summary>

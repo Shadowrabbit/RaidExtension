@@ -64,7 +64,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override bool FactionCanBeGroupSource(Faction f, Map map, bool desperate = false)
         {
-            return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction;
+            return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction && !f.Hidden;
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace SR.ModRimWorld.RaidExtension
                 Log.Warning($"[SR.ModRimWorld.RaidExtension]Got no pawns spawning raid from parms {parms}");
                 return false;
             }
-            
+
             //解决信件
             ResolveLetter(parms, pawnList);
             //设置集群AI

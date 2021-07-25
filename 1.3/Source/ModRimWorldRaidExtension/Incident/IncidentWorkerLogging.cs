@@ -56,7 +56,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override bool FactionCanBeGroupSource(Faction f, Map map, bool desperate = false)
         {
-            return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction;
+            return base.FactionCanBeGroupSource(f, map, desperate) && f.def.humanlikeFaction && !f.Hidden;
         }
 
         /// <summary>

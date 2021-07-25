@@ -49,6 +49,16 @@ namespace SR.ModRimWorld.RaidExtension
                 return false;
             }
 
+            if (lord.Map?.listerThings == null)
+            {
+                return false;
+            }
+
+            if (lord.ownedPawns == null || lord.ownedPawns.Count <= 0)
+            {
+                return false;
+            }
+
             //如果目标在非死亡状态逃离地图 重新选取目标
             if (!lord.Map.listerThings.Contains(_targetAnimal))
             {
