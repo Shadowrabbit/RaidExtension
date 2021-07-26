@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Logging -->
+
+  <SrLogging.arrivalTextEnemy>彼らはコロニー領域にある樹木を伐採するようです.</SrLogging.arrivalTextEnemy>
+  <SrLogging.letterLabelEnemy>違法伐採</SrLogging.letterLabelEnemy>
+
+
+  <!-- Poaching -->
+
+  <SrPoaching.arrivalTextEnemy>彼らはコロニー領域内にいる動物を密猟するようです.</SrPoaching.arrivalTextEnemy>
+  <SrPoaching.letterLabelEnemy>密猟</SrPoaching.letterLabelEnemy>
+
+</LanguageData>
