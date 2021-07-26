@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- Logging -->
+
+  <SrLogging.arrivalTextEnemy>그들은 근처 목재를 벌목하려 합니다.</SrLogging.arrivalTextEnemy>
+  <SrLogging.letterLabelEnemy>벌목</SrLogging.letterLabelEnemy>
+
+
+  <!-- Poaching -->
+
+  <SrPoaching.arrivalTextEnemy>그들은 근처에서 사냥하려고 합니다.</SrPoaching.arrivalTextEnemy>
+  <SrPoaching.letterLabelEnemy>수렵</SrPoaching.letterLabelEnemy>
+
+
+</LanguageData>
