@@ -58,7 +58,7 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             //远程的情况 先算当前位置适不适合攻击
-            var num1 = (double) CoverUtility.CalculateOverallBlockChance((LocalTargetInfo) pawn,
+            var num1 = (double)CoverUtility.CalculateOverallBlockChance((LocalTargetInfo)pawn,
                 enemyTarget.Position, pawn.Map) > 0.01
                 ? 1
                 : 0;
@@ -99,7 +99,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         public override ThinkNode DeepCopy(bool resolve = true)
         {
-            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal) base.DeepCopy(resolve);
+            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal)base.DeepCopy(resolve);
             return jobGiverAIFightHostileFaction;
         }
 
@@ -120,6 +120,12 @@ namespace SR.ModRimWorld.RaidExtension
 
             var targetAnimal = lordJobPoaching.TargetAnimal;
             if (targetAnimal == null)
+            {
+                return null;
+            }
+
+            //自己派系的动物
+            if (targetAnimal.Faction != null && pawn.Faction != null && targetAnimal.Faction == pawn.Faction)
             {
                 return null;
             }
