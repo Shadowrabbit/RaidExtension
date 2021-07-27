@@ -64,6 +64,7 @@
         <Compile Include="DefOf\JobDefOf.cs" />
         <Compile Include="DefOf\RaidStrategyDefOf.cs" />
         <Compile Include="Def\MiscDef.cs" />
+        <Compile Include="Extension\Map\MapExtension.cs" />
         <Compile Include="Extension\Pawn\PawnExtension.cs" />
         <Compile Include="Extension\Pawn\PlantExtension.cs" />
         <Compile Include="Incident\IncidentWorkerHositleTraderCaravanPassing.cs" />
