@@ -9,8 +9,8 @@
 
   <!-- Poaching -->
 
-  <SrPoaching.arrivalTextEnemy>그들은 근처에서 사냥하려고 합니다.</SrPoaching.arrivalTextEnemy>
-  <SrPoaching.letterLabelEnemy>수렵</SrPoaching.letterLabelEnemy>
+  <SrPoaching.arrivalTextEnemy>그들은 근처에서 밀렵하려고 합니다.</SrPoaching.arrivalTextEnemy>
+  <SrPoaching.letterLabelEnemy>밀렵</SrPoaching.letterLabelEnemy>
 
 
 </LanguageData>
