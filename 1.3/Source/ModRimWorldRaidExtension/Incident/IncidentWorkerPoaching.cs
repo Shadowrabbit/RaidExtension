@@ -36,12 +36,7 @@ namespace SR.ModRimWorld.RaidExtension
                 return false;
             }
 
-
-            bool SpoilValidator(Thing t) => t is Pawn animal && animal.RaceProps.Animal &&
-                                            !animal.Dead && animal.RaceProps.baseHealthScale >=
-                                            MinTargetRequireHealthScale;
-
-            var isAnimalTargetExist = Enumerable.Any(map.mapPawns.AllPawnsSpawned, SpoilValidator);
+            var isAnimalTargetExist = map.IsAnimalTargetExist(MinTargetRequireHealthScale);
 
             //目标动物不存在 无法触发事件
             if (!isAnimalTargetExist)
@@ -74,6 +69,20 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
+            if (!(parms.target is Map map))
+            {
+                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
+                return false;
+            }
+
+            var isAnimalTargetExist = map.IsAnimalTargetExist(MinTargetRequireHealthScale);
+            //目标动物不存在 无法触发事件
+            if (!isAnimalTargetExist)
+            {
+                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
+                return false;
+            }
+
             //处理袭击点数
             ResolveRaidPoints(parms);
             //处理袭击派系
@@ -117,6 +126,12 @@ namespace SR.ModRimWorld.RaidExtension
 
             //设置狩猎目标
             var animal = pawnList[0].FindTargetAnimal(MinTargetRequireHealthScale);
+            if (animal == null)
+            {
+                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
+                return false;
+            }
+
             raidStrategyWorkerPoaching.TempAnimal = animal;
             raidStrategyWorkerPoaching.MakeLords(parms, pawnList);
             //袭击时设置一倍速
@@ -169,8 +184,8 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="pawnList"></param>
         protected virtual void ResolveLetter(IncidentParms parms, List<Pawn> pawnList)
         {
-            var letterLabel = (TaggedString) GetLetterLabel(parms);
-            var letterText = (TaggedString) GetLetterText(parms, pawnList);
+            var letterLabel = (TaggedString)GetLetterLabel(parms);
+            var letterText = (TaggedString)GetLetterText(parms, pawnList);
             PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter(pawnList, ref letterLabel, ref letterText,
                 GetRelatedPawnsInfoLetterText(parms), true);
             SendStandardLetter(letterLabel, letterText, GetLetterDef(), parms, pawnList,

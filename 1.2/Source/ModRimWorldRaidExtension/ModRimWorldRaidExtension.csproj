@@ -62,6 +62,8 @@
         <Compile Include="AI\AISingle\JobGiverTakePreyExit.cs" />
         <Compile Include="AI\AISingle\JobGiverTakeWoodExit.cs" />
         <Compile Include="DefOf\JobDefOf.cs" />
+        <Compile Include="Extension\Map\MapExtension.cs" />
+        <Compile Include="Extension\Pawn\PalntExtension.cs" />
         <Compile Include="Extension\Pawn\PawnExtension.cs" />
         <Compile Include="Incident\IncidentWorkerHositleTraderCaravanPassing.cs" />
         <Compile Include="Incident\IncidentWorkerHositleTraveler.cs" />
