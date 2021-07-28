@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-    <SrTakePreyExit>{1}의 {0}이 사냥한 동물을 들고 떠나려 합니다.</SrTakePreyExit>
+    <SrTakePreyExit>{1}의 {0}(이)가 사냥한 동물을 들고 떠나려 합니다.</SrTakePreyExit>
 
 
 </LanguageData>
