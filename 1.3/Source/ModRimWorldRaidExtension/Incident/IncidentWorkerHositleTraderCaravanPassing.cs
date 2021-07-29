@@ -73,7 +73,7 @@ namespace SR.ModRimWorld.RaidExtension
             if (!RCellFinder.TryFindTravelDestFrom(parms.spawnCenter, map, out var travelDest))
             {
                 Log.Warning(
-                    $"[SR.ModRimWorld.RaidExtension]Failed to do hositle trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
+                    $"{MiscDef.LogTag}Failed to do hositle trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
                 return false;
             }
 

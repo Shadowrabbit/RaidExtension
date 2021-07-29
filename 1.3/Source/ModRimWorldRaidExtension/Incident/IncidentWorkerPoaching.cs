@@ -19,9 +19,8 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class IncidentWorkerPoaching : IncidentWorker_RaidEnemy
     {
-        private const float MinTargetRequireHealthScale = 1.2f; //健康缩放最小需求 用来判断动物强度
         private const int MaxThreatPoints = 3000; //最大袭击点数
-        private const int MinThreatPoints = 800; //最小袭击点数
+        private const int MinThreatPoints = 300; //最小袭击点数
 
         /// <summary>
         /// 是否可以生成事件
@@ -32,16 +31,16 @@ namespace SR.ModRimWorld.RaidExtension
         {
             if (!(parms.target is Map map))
             {
-                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
+                Log.Error($"{MiscDef.LogTag}target must be a map.");
                 return false;
             }
 
-            var isAnimalTargetExist = map.IsAnimalTargetExist(MinTargetRequireHealthScale);
+            var isAnimalTargetExist = map.IsAnimalTargetExist(MiscDef.MinTargetRequireHealthScale);
 
             //目标动物不存在 无法触发事件
             if (!isAnimalTargetExist)
             {
-                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
+                Log.Warning($"{MiscDef.LogTag}can't find any animal.");
                 return false;
             }
 
@@ -71,15 +70,15 @@ namespace SR.ModRimWorld.RaidExtension
         {
             if (!(parms.target is Map map))
             {
-                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
+                Log.Error($"{MiscDef.LogTag}target must be a map.");
                 return false;
             }
 
-            var isAnimalTargetExist = map.IsAnimalTargetExist(MinTargetRequireHealthScale);
+            var isAnimalTargetExist = map.IsAnimalTargetExist(MiscDef.MinTargetRequireHealthScale);
             //目标动物不存在 无法触发事件
             if (!isAnimalTargetExist)
             {
-                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
+                Log.Warning($"{MiscDef.LogTag}can't find any animal.");
                 return false;
             }
 
@@ -88,7 +87,7 @@ namespace SR.ModRimWorld.RaidExtension
             //处理袭击派系
             if (!TryResolveRaidFaction(parms))
             {
-                Log.Warning("[SR.ModRimWorld.RaidExtension]cant find raid factions");
+                Log.Warning($"{MiscDef.LogTag}cant find raid factions");
                 return false;
             }
 
@@ -103,7 +102,7 @@ namespace SR.ModRimWorld.RaidExtension
             //尝试解决袭击召唤中心
             if (!parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms))
             {
-                Log.Warning($"[SR.ModRimWorld.RaidExtension]cant resolve raid spawn center: {parms}");
+                Log.Warning($"{MiscDef.LogTag}cant resolve raid spawn center: {parms}");
                 return false;
             }
 
@@ -111,7 +110,7 @@ namespace SR.ModRimWorld.RaidExtension
             var pawnList = parms.raidStrategy.Worker.SpawnThreats(parms);
             if (pawnList.Count == 0)
             {
-                Log.Warning($"[SR.ModRimWorld.RaidExtension]Got no pawns spawning raid from parms {parms}");
+                Log.Warning($"{MiscDef.LogTag}Got no pawns spawning raid from parms {parms}");
                 return false;
             }
 
@@ -120,15 +119,15 @@ namespace SR.ModRimWorld.RaidExtension
             //设置集群AI
             if (!(parms.raidStrategy.Worker is RaidStrategyWorkerPoaching raidStrategyWorkerPoaching))
             {
-                Log.Error("[SR.ModRimWorld.RaidExtension]strategy must be RaidStrategyWorkerPoaching");
+                Log.Error($"{MiscDef.LogTag}strategy must be RaidStrategyWorkerPoaching");
                 return false;
             }
 
             //设置狩猎目标
-            var animal = pawnList[0].FindTargetAnimal(MinTargetRequireHealthScale);
+            var animal = pawnList[0].FindTargetAnimal(MiscDef.MinTargetRequireHealthScale);
             if (animal == null)
             {
-                Log.Warning("[SR.ModRimWorld.RaidExtension]can't find any animal.");
+                Log.Warning($"{MiscDef.LogTag}can't find any animal.");
                 return false;
             }
 
@@ -184,8 +183,8 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="pawnList"></param>
         protected virtual void ResolveLetter(IncidentParms parms, List<Pawn> pawnList)
         {
-            var letterLabel = (TaggedString)GetLetterLabel(parms);
-            var letterText = (TaggedString)GetLetterText(parms, pawnList);
+            var letterLabel = (TaggedString) GetLetterLabel(parms);
+            var letterText = (TaggedString) GetLetterText(parms, pawnList);
             PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter(pawnList, ref letterLabel, ref letterText,
                 GetRelatedPawnsInfoLetterText(parms), true);
             SendStandardLetter(letterLabel, letterText, GetLetterDef(), parms, pawnList,

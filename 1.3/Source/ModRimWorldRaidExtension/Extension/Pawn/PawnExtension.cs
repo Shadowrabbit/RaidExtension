@@ -18,6 +18,21 @@ namespace SR.ModRimWorld.RaidExtension
     public static class PawnExtension
     {
         /// <summary>
+        /// 目标动物是否合法
+        /// </summary>
+        /// <param name="searcher"></param>
+        /// <param name="target"></param>
+        /// <param name="minTargetRequireHealthScale"></param>
+        /// <returns></returns>
+        public static bool IsTargetAnimalValid(this Pawn searcher, Thing target, float minTargetRequireHealthScale)
+        {
+            //目标是动物 没死 符合健康缩放 可保留 不是搜寻者派系的 
+            return target is Pawn animal && animal.RaceProps != null && animal.RaceProps.Animal && !animal.Dead &&
+                   animal.RaceProps.baseHealthScale >= minTargetRequireHealthScale && searcher.CanReserve(target) &&
+                   searcher.Faction != null && (animal.Faction == null || searcher.Faction != animal.Faction);
+        }
+
+        /// <summary>
         /// 寻找最近的 满足体型的动物
         /// </summary>
         /// <param name="leader"></param>
@@ -26,17 +41,14 @@ namespace SR.ModRimWorld.RaidExtension
         public static Pawn FindTargetAnimal(this Pawn leader, float minTargetRequireHealthScale)
         {
             //验证器
-            bool SpoilValidator(Thing t) => (t is Pawn animal)
-                                            && animal.RaceProps.Animal && !animal.Dead &&
-                                            animal.RaceProps.baseHealthScale >= minTargetRequireHealthScale
-                                            && leader.CanReserve(t);
+            bool SpoilValidator(Thing t) => leader.IsTargetAnimalValid(t, minTargetRequireHealthScale);
 
             //找队长身边最近的动物
             var targetThing = GenClosest.ClosestThing_Global_Reachable(leader.Position, leader.Map,
                 leader.Map.mapPawns.AllPawnsSpawned, PathEndMode.ClosestTouch,
                 TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some), validator: SpoilValidator);
 
-            return (Pawn)targetThing;
+            return (Pawn) targetThing;
         }
 
         /// <summary>

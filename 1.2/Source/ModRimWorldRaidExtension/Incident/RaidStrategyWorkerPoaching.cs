@@ -22,6 +22,28 @@ namespace SR.ModRimWorld.RaidExtension
         public Pawn TempAnimal { get; set; } //目标动物
 
         /// <summary>
+        /// 该策略适用于
+        /// </summary>
+        /// <param name="parms"></param>
+        /// <param name="groupKind"></param>
+        /// <returns></returns>
+        public override bool CanUseWith(IncidentParms parms, PawnGroupKindDef groupKind)
+        {
+            return base.CanUseWith(parms, groupKind) && parms.faction != null && parms.faction != Faction.OfMechanoids;
+        }
+
+        /// <summary>
+        /// 策略是否适用于角色
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="otherPawns"></param>
+        /// <returns></returns>
+        public override bool CanUsePawn(Pawn p, List<Pawn> otherPawns)
+        {
+            return base.CanUsePawn(p, otherPawns) && p.RaceProps.Humanlike;
+        }
+
+        /// <summary>
         /// 创建集群AI工作
         /// </summary>
         /// <param name="parms"></param>
@@ -32,7 +54,8 @@ namespace SR.ModRimWorld.RaidExtension
         protected override LordJob MakeLordJob(IncidentParms parms, Map map, List<Pawn> pawns, int raidSeed)
         {
             var siegePositionFrom =
-                RCellFinder.FindSiegePositionFrom_NewTemp(parms.spawnCenter.IsValid ? parms.spawnCenter : pawns[0].PositionHeld,
+                RCellFinder.FindSiegePositionFrom_NewTemp(
+                    parms.spawnCenter.IsValid ? parms.spawnCenter : pawns[0].PositionHeld,
                     map);
             return new LordJobPoaching(siegePositionFrom, TempAnimal);
         }

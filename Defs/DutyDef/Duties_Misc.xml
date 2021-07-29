@@ -5,10 +5,10 @@
         <defName>SrLogging</defName>
         <thinkNode Class="ThinkNode_Priority">
             <subNodes>
-                <li Class="JobGiver_AIFightEnemies">
-                    <targetAcquireRadius>35</targetAcquireRadius>
-                    <targetKeepRadius>40</targetKeepRadius>
-                </li>
+<!--                <li Class="JobGiver_AIFightEnemies">-->
+<!--                    <targetAcquireRadius>35</targetAcquireRadius>-->
+<!--                    <targetKeepRadius>40</targetKeepRadius>-->
+<!--                </li>-->
                 <li Class="SR.ModRimWorld.RaidExtension.JobGiverLogging"/>
             </subNodes>
         </thinkNode>
@@ -37,17 +37,17 @@
         <defName>SrPoaching</defName>
         <thinkNode Class="ThinkNode_Priority">
             <subNodes>
-                <li Class="JobGiver_AIFightEnemies">
-                    <targetAcquireRadius>18</targetAcquireRadius>
-                    <targetKeepRadius>20</targetKeepRadius>
-                </li>
+<!--                <li Class="JobGiver_AIFightEnemies">-->
+<!--                    <targetAcquireRadius>18</targetAcquireRadius>-->
+<!--                    <targetKeepRadius>20</targetKeepRadius>-->
+<!--                </li>-->
                 <li Class="SR.ModRimWorld.RaidExtension.JobGiverAIFightAnimal">
                     <targetAcquireRadius>18</targetAcquireRadius>
                     <targetKeepRadius>20</targetKeepRadius>
                 </li>
-                <li Class="JobGiver_AISapper">
-                    <canMineNonMineables>false</canMineNonMineables>
-                </li>
+<!--                <li Class="JobGiver_AISapper">-->
+<!--                    <canMineNonMineables>false</canMineNonMineables>-->
+<!--                </li>-->
             </subNodes>
         </thinkNode>
     </DutyDef>

@@ -19,7 +19,12 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         public static bool IsTree(this Plant plant)
         {
-            return plant.def?.plant != null && plant.def.plant.IsTree;
+            if (plant.def?.plant == null)
+            {
+                return false;
+            }
+            
+            return plant.def.plant.IsTree || plant.def.defName.Equals(MiscDef.DefNameGauranlenTree);
         }
     }
 }

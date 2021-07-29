@@ -46,7 +46,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="AI\AIGroup\DutyDefOf.cs" />
         <Compile Include="AI\AIGroup\LordJobHositleTraderCaravanTravelAndExit.cs" />
         <Compile Include="AI\AIGroup\LordJobLogging.cs" />
         <Compile Include="AI\AIGroup\LordJobPoaching.cs" />
@@ -61,15 +60,17 @@
         <Compile Include="AI\AISingle\JobGiverLogging.cs" />
         <Compile Include="AI\AISingle\JobGiverTakePreyExit.cs" />
         <Compile Include="AI\AISingle\JobGiverTakeWoodExit.cs" />
+        <Compile Include="DefOf\DutyDefOf.cs" />
         <Compile Include="DefOf\JobDefOf.cs" />
+        <Compile Include="DefOf\RaidStrategyDefOf.cs" />
+        <Compile Include="Def\MiscDef.cs" />
         <Compile Include="Extension\Map\MapExtension.cs" />
-        <Compile Include="Extension\Pawn\PalntExtension.cs" />
         <Compile Include="Extension\Pawn\PawnExtension.cs" />
+        <Compile Include="Extension\Pawn\PlantExtension.cs" />
         <Compile Include="Incident\IncidentWorkerHositleTraderCaravanPassing.cs" />
         <Compile Include="Incident\IncidentWorkerHositleTraveler.cs" />
         <Compile Include="Incident\IncidentWorkerLogging.cs" />
         <Compile Include="Incident\IncidentWorkerPoaching.cs" />
-        <Compile Include="Incident\RaidStrategyDefOf.cs" />
         <Compile Include="Incident\RaidStrategyWorkerLogging.cs" />
         <Compile Include="Incident\RaidStrategyWorkerPoaching.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

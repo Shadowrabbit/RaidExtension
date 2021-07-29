@@ -19,6 +19,29 @@ namespace SR.ModRimWorld.RaidExtension
     public class RaidStrategyWorkerLogging : RaidStrategyWorker
     {
         /// <summary>
+        /// 该策略适用于
+        /// </summary>
+        /// <param name="parms"></param>
+        /// <param name="groupKind"></param>
+        /// <returns></returns>
+        public override bool CanUseWith(IncidentParms parms, PawnGroupKindDef groupKind)
+        {
+            return base.CanUseWith(parms, groupKind) && parms.faction != null && parms.faction != Faction.OfMechanoids;
+        }
+
+        /// <summary>
+        /// 策略是否适用于角色
+        /// </summary>
+        /// <param name="pointsTotal"></param>
+        /// <param name="p"></param>
+        /// <param name="otherPawns"></param>
+        /// <returns></returns>
+        public override bool CanUsePawn(float pointsTotal, Pawn p, List<Pawn> otherPawns)
+        {
+            return base.CanUsePawn(pointsTotal, p, otherPawns) && p.RaceProps.Humanlike;
+        }
+
+        /// <summary>
         /// 创建集群AI工作
         /// </summary>
         /// <param name="parms"></param>

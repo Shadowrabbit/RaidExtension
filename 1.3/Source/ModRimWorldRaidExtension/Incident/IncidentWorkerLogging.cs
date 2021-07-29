@@ -28,15 +28,15 @@ namespace SR.ModRimWorld.RaidExtension
         {
             if (!(parms.target is Map map))
             {
-                Log.Error("[SR.ModRimWorld.RaidExtension]target must be a map.");
+                Log.Error($"{MiscDef.LogTag}target must be a map.");
                 return false;
             }
-            
+
             var isTreeExist = map.IsTreeExist();
             //没有树 无法触发事件
             if (!isTreeExist)
             {
-                Log.Warning("[SR.ModRimWorld.RaidExtension]there is no tree.");
+                Log.Warning($"{MiscDef.LogTag}there is no tree.");
                 return false;
             }
 

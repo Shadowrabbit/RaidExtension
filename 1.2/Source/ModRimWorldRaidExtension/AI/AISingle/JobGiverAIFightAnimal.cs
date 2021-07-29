@@ -18,6 +18,8 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class JobGiverAIFightAnimal : JobGiver_AIFightEnemies
     {
+        private const float MinTargetRequireHealthScale = 1.2f;
+
         /// <summary>
         /// 尝试分配工作
         /// </summary>
@@ -57,7 +59,7 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             //远程的情况 先算当前位置适不适合攻击
-            var num1 = (double)CoverUtility.CalculateOverallBlockChance((LocalTargetInfo)pawn,
+            var num1 = (double) CoverUtility.CalculateOverallBlockChance((LocalTargetInfo) pawn,
                 enemyTarget.Position, pawn.Map) > 0.01
                 ? 1
                 : 0;
@@ -98,7 +100,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <returns></returns>
         public override ThinkNode DeepCopy(bool resolve = true)
         {
-            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal)base.DeepCopy(resolve);
+            var jobGiverAIFightHostileFaction = (JobGiverAIFightAnimal) base.DeepCopy(resolve);
             return jobGiverAIFightHostileFaction;
         }
 
@@ -118,30 +120,7 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             var targetAnimal = lordJobPoaching.TargetAnimal;
-            if (targetAnimal == null)
-            {
-                return null;
-            }
-
-            //自己派系的动物
-            if (targetAnimal.Faction != null && pawn.Faction != null && targetAnimal.Faction == pawn.Faction)
-            {
-                return null;
-            }
-
-            if (lord.Map?.listerThings == null)
-            {
-                return null;
-            }
-
-            //目标已无威胁
-            if (targetAnimal.Dead || !lord.Map.listerThings.Contains(targetAnimal))
-            {
-                return null;
-            }
-
-            //无法保留
-            return !pawn.CanReserve(targetAnimal) ? null : targetAnimal;
+            return pawn.IsTargetAnimalValid(targetAnimal, MinTargetRequireHealthScale) ? targetAnimal : null;
         }
 
         /// <summary>

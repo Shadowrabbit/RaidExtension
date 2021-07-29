@@ -6,8 +6,7 @@
         <workerClass>SR.ModRimworld.RaidExtension.RaidStrategyWorkerLogging</workerClass>
         <selectionWeightPerPointsCurve>
             <points>
-                <li>(100,0.4)</li>
-                <li>(700,0.8)</li>
+                <li>(1,0)</li>
             </points>
         </selectionWeightPerPointsCurve>
         <pointsFactorCurve>
@@ -27,13 +26,12 @@
         <workerClass>SR.ModRimworld.RaidExtension.RaidStrategyWorkerPoaching</workerClass>
         <selectionWeightPerPointsCurve>
             <points>
-                <li>(100,0.4)</li>
-                <li>(700,0.8)</li>
+                <li>(1,0)</li>
             </points>
         </selectionWeightPerPointsCurve>
         <pointsFactorCurve>
             <points>
-                <li>0, 1</li>
+                <li>(1,0)</li>
             </points>
         </pointsFactorCurve>
         <arriveModes>

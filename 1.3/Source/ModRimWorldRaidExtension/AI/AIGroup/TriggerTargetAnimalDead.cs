@@ -16,7 +16,6 @@ namespace SR.ModRimWorld.RaidExtension
     public class TriggerTargetAnimalDead : Trigger
     {
         private Pawn _targetAnimal; //狩猎目标
-        private const float MinTargetRequireHealthScale = 1.2f; //健康缩放最小需求 用来判断动物强度
         private const int CheckEveryTicks = 100;
 
         public TriggerTargetAnimalDead(Pawn targetAnimal)
@@ -26,8 +25,10 @@ namespace SR.ModRimWorld.RaidExtension
 
         public override bool ActivateOn(Lord lord, TriggerSignal signal)
         {
+            //信号类型不关心
             if (signal.type != TriggerSignalType.Tick)
             {
+                Log.Warning($"{MiscDef.LogTag}signal don't care");
                 return false;
             }
 
@@ -40,6 +41,38 @@ namespace SR.ModRimWorld.RaidExtension
             //集群AI错误
             if (!(lord?.LordJob is LordJobPoaching lordJobPoaching))
             {
+                Log.Error($"{MiscDef.LogTag}lordjob is wrong");
+                return false;
+            }
+
+            //地图上的物体列表异常
+            if (lord.Map?.listerThings == null)
+            {
+                Log.Error($"{MiscDef.LogTag}listerThings is null");
+                return false;
+            }
+
+            //lord异常
+            if (lord.ownedPawns == null || lord.ownedPawns.Count <= 0)
+            {
+                Log.Error($"{MiscDef.LogTag}no pawns in lord");
+                return false;
+            }
+
+            //异常原因目标动物被销毁
+            if (_targetAnimal == null)
+            {
+                Log.Warning($"{MiscDef.LogTag}unknown anomaly causes the target to disappear");
+                //尝试重新查找
+                var animal = lord.ownedPawns[0].FindTargetAnimal(MiscDef.MinTargetRequireHealthScale);
+                //没有目标
+                if (animal == null)
+                {
+                    return true;
+                }
+
+                _targetAnimal = animal;
+                lordJobPoaching.TargetAnimal = animal;
                 return false;
             }
 
@@ -49,24 +82,7 @@ namespace SR.ModRimWorld.RaidExtension
                 return false;
             }
 
-            if (lord.Map?.listerThings == null)
-            {
-                return false;
-            }
-
-            if (lord.ownedPawns == null || lord.ownedPawns.Count <= 0)
-            {
-                return false;
-            }
-
-            //如果目标在非死亡状态逃离地图 重新选取目标
-            if (!lord.Map.listerThings.Contains(_targetAnimal))
-            {
-                lordJobPoaching.TargetAnimal = lord.ownedPawns[0].FindTargetAnimal(MinTargetRequireHealthScale);
-                _targetAnimal = lordJobPoaching.TargetAnimal;
-            }
-
-            //队长半径10以内如果有动物的话继续狩猎
+            //目标死亡 队长半径10以内如果有动物的话继续狩猎
             foreach (var thing in GenRadial.RadialDistinctThingsAround(lord.ownedPawns[0].Position, lord.Map, 20f,
                 true))
             {
@@ -75,22 +91,8 @@ namespace SR.ModRimWorld.RaidExtension
                     continue;
                 }
 
-                if (animal.RaceProps == null)
-                {
-                    continue;
-                }
-
-                if (!animal.RaceProps.Animal)
-                {
-                    continue;
-                }
-
-                if (!lord.ownedPawns[0].CanReserve(animal))
-                {
-                    continue;
-                }
-
-                if (animal.Dead)
+                //不符合目标要求
+                if (!lord.ownedPawns[0].IsTargetAnimalValid(animal, MiscDef.MinTargetRequireHealthScale))
                 {
                     continue;
                 }
