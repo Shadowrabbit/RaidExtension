@@ -19,9 +19,6 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class IncidentWorkerPoaching : IncidentWorker_RaidEnemy
     {
-        private const int MaxThreatPoints = 3000; //最大袭击点数
-        private const int MinThreatPoints = 300; //最小袭击点数
-
         /// <summary>
         /// 是否可以生成事件
         /// </summary>
@@ -156,14 +153,14 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="parms"></param>
         protected override void ResolveRaidPoints(IncidentParms parms)
         {
-            if (parms.points > MaxThreatPoints)
+            if (parms.points > MiscDef.MaxThreatPoints)
             {
-                parms.points = MaxThreatPoints;
+                parms.points = MiscDef.MaxThreatPoints;
             }
 
-            if (parms.points < MinThreatPoints)
+            if (parms.points < MiscDef.MinThreatPoints)
             {
-                parms.points = MinThreatPoints;
+                parms.points = MiscDef.MinThreatPoints;
             }
         }
 

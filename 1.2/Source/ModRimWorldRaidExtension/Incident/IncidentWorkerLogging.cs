@@ -17,8 +17,6 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class IncidentWorkerLogging : IncidentWorker_RaidEnemy
     {
-        private const int MaxThreatPoints = 3000; //袭击点数
-
         /// <summary>
         /// 是否可以生成事件
         /// </summary>
@@ -63,9 +61,9 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="parms"></param>
         protected override void ResolveRaidPoints(IncidentParms parms)
         {
-            if (parms.points > MaxThreatPoints)
+            if (parms.points > MiscDef.MaxThreatPoints)
             {
-                parms.points = MaxThreatPoints;
+                parms.points = MiscDef.MaxThreatPoints;
             }
         }
 
