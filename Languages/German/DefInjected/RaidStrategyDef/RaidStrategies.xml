@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 伐木 -->
+
+  <SrLogging.arrivalTextEnemy>Sie planen, in der Nähe Holz zu schlagen.</SrLogging.arrivalTextEnemy>
+  <SrLogging.letterLabelEnemy>Holzt ab</SrLogging.letterLabelEnemy>
+
+
+  <!-- 偷猎 -->
+
+  <SrPoaching.arrivalTextEnemy>Sie planen, in der Nähe zu wildern.</SrPoaching.arrivalTextEnemy>
+  <SrPoaching.letterLabelEnemy>Wildert</SrPoaching.letterLabelEnemy>
+
+
+</LanguageData>
