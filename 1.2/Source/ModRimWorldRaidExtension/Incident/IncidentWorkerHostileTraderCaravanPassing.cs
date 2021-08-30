@@ -55,6 +55,13 @@ namespace SR.ModRimWorld.RaidExtension
                 return false;
             }
 
+            if (!RCellFinder.TryFindTravelDestFrom(parms.spawnCenter, map, out var travelDest))
+            {
+                Log.Warning(
+                    $"{MiscDef.LogTag}Failed to do hostile trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
+                return false;
+            }
+
             var list = SpawnPawns(parms);
             if (list.Count == 0)
             {
@@ -67,16 +74,7 @@ namespace SR.ModRimWorld.RaidExtension
             }
 
             var traderKind = (from pawn in list where pawn.TraderKind != null select pawn.TraderKind).FirstOrDefault();
-
             SendLetter(parms, list, traderKind);
-            RCellFinder.TryFindRandomSpotJustOutsideColony(list[0], out _);
-            if (!RCellFinder.TryFindTravelDestFrom(parms.spawnCenter, map, out var travelDest))
-            {
-                Log.Warning(
-                    $"{MiscDef.LogTag}Failed to do hostile trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
-                return false;
-            }
-
             var jobTravelAndExit = new LordJobHostileTraderCaravanTravelAndExit(travelDest);
             LordMaker.MakeNewLord(parms.faction, jobTravelAndExit, map, list);
             return true;
