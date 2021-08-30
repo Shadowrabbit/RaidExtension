@@ -62,7 +62,7 @@ namespace SR.ModRimWorld.RaidExtension
             //离开地图
             var toilExitMap = new Toil
             {
-                initAction = delegate()
+                initAction = delegate
                 {
                     if (pawn.Position.OnEdge(pawn.Map) ||
                         pawn.Map.exitMapGrid.IsExitCell(pawn.Position))

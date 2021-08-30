@@ -1,5 +1,5 @@
 // ******************************************************************
-//       /\ /|       @file       IncidentWorkerHositleTraderCaravanPassing.cs
+//       /\ /|       @file       IncidentWorkerHostileTraderCaravanPassing.cs
 //       \ V/        @brief      敌对商队经过
 //       | "")       @author     Shadowrabbit, yingtu0401@gmail.com
 //       /  |                    
@@ -17,7 +17,7 @@ using Verse.AI.Group;
 namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
-    public class IncidentWorkerHositleTraderCaravanPassing : IncidentWorker_TraderCaravanArrival
+    public class IncidentWorkerHostileTraderCaravanPassing : IncidentWorker_TraderCaravanArrival
     {
         /// <summary>
         /// 派系选中条件
@@ -69,15 +69,15 @@ namespace SR.ModRimWorld.RaidExtension
             var traderKind = (from pawn in list where pawn.TraderKind != null select pawn.TraderKind).FirstOrDefault();
 
             SendLetter(parms, list, traderKind);
-            RCellFinder.TryFindRandomSpotJustOutsideColony(list[0], out var chillSpot);
+            RCellFinder.TryFindRandomSpotJustOutsideColony(list[0], out _);
             if (!RCellFinder.TryFindTravelDestFrom(parms.spawnCenter, map, out var travelDest))
             {
                 Log.Warning(
-                    $"{MiscDef.LogTag}Failed to do hositle trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
+                    $"{MiscDef.LogTag}Failed to do hostile trader caravan Passing incident from {parms.spawnCenter} : Couldn't find anywhere for the traveler to go.");
                 return false;
             }
 
-            var jobTravelAndExit = new LordJobHositleTraderCaravanTravelAndExit(travelDest);
+            var jobTravelAndExit = new LordJobHostileTraderCaravanTravelAndExit(travelDest);
             LordMaker.MakeNewLord(parms.faction, jobTravelAndExit, map, list);
             return true;
         }
@@ -90,7 +90,7 @@ namespace SR.ModRimWorld.RaidExtension
         /// <param name="traderKind"></param>
         protected override void SendLetter(IncidentParms parms, List<Pawn> pawns, TraderKindDef traderKind)
         {
-            var letterLabel = "SrHositleTraderCaravanPassing"
+            var letterLabel = "SrHostileTraderCaravanPassing"
                 .Translate((NamedArgument) parms.faction.Name, (NamedArgument) traderKind.label).CapitalizeFirst();
             var letterText = "LetterTraderCaravanArrival"
                 .Translate(parms.faction.NameColored, (NamedArgument) traderKind.label).CapitalizeFirst();

@@ -18,7 +18,7 @@ namespace SR.ModRimWorld.RaidExtension
     [UsedImplicitly]
     public class JobGiverTakePreyExit : ThinkNode_JobGiver
     {
-        private const float MaxSearchDistence = 99f; //最大触发距离
+        private const float MaxSearchDist = 99f; //最大触发距离
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -34,7 +34,7 @@ namespace SR.ModRimWorld.RaidExtension
                                        corpseAnimal.InnerPawn.RaceProps.Animal;
 
             //寻找身边合适的战利品
-            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDistence, null, Validator);
+            var spoils = pawn.TryFindBestSpoilsToTake(pawn.Position, pawn.Map, MaxSearchDist, null, Validator);
             if (spoils == null)
             {
                 return null;

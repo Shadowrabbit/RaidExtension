@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <SrHositleTraderCaravanPassing>Vorbeiziehende Karawane einer feindlichen Fraktion</SrHositleTraderCaravanPassing>
-
+    <SrHostileTraderCaravanPassing>Vorbeiziehende Karawane einer feindlichen Fraktion</SrHostileTraderCaravanPassing>
 </Defs>

@@ -8,7 +8,6 @@
 // ******************************************************************
 
 using Verse;
-using Verse.AI;
 using Verse.AI.Group;
 
 namespace SR.ModRimWorld.RaidExtension
@@ -41,7 +40,7 @@ namespace SR.ModRimWorld.RaidExtension
             //集群AI错误
             if (!(lord?.LordJob is LordJobPoaching lordJobPoaching))
             {
-                Log.Error($"{MiscDef.LogTag}lordjob is wrong");
+                Log.Error($"{MiscDef.LogTag}lordJob is wrong");
                 return false;
             }
 

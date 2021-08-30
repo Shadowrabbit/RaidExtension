@@ -1,5 +1,5 @@
 // ******************************************************************
-//       /\ /|       @file       LordJobHositleTraderCaravanTravelAndExit.cs
+//       /\ /|       @file       LordJobHostileTraderCaravanTravelAndExit.cs
 //       \ V/        @brief      集群AI 敌对商队旅行和离开
 //       | "")       @author     Shadowrabbit, yingtu0401@gmail.com
 //       /  |                    
@@ -7,21 +7,22 @@
 //    *(__\_\        @Copyright  Copyright (c) 2021, Shadowrabbit
 // ******************************************************************
 
-using RimWorld;
+using JetBrains.Annotations;
 using Verse;
 using Verse.AI.Group;
 
 namespace SR.ModRimWorld.RaidExtension
 {
-    public class LordJobHositleTraderCaravanTravelAndExit : LordJob
+    public class LordJobHostileTraderCaravanTravelAndExit : LordJob
     {
         private IntVec3 _travelDest;
 
-        public LordJobHositleTraderCaravanTravelAndExit()
+        [UsedImplicitly]
+        public LordJobHostileTraderCaravanTravelAndExit()
         {
         }
 
-        public LordJobHositleTraderCaravanTravelAndExit(IntVec3 travelDest) => _travelDest = travelDest;
+        public LordJobHostileTraderCaravanTravelAndExit(IntVec3 travelDest) => _travelDest = travelDest;
 
         /// <summary>
         /// 序列化
@@ -51,11 +52,11 @@ namespace SR.ModRimWorld.RaidExtension
             //过渡 任意状态到掩护逃跑
             foreach (var lordToil in stateGraph.lordToils)
             {
-                var transitionAnyToxitMapAndEscortCarriers =
+                var transitionAnyToExitMapAndEscortCarriers =
                     new Transition(lordToil, lordToilExitMapTraderFighting);
                 var triggerPawnLost = new Trigger_PawnLost();
-                transitionAnyToxitMapAndEscortCarriers.AddTrigger(triggerPawnLost);
-                stateGraph.AddTransition(transitionAnyToxitMapAndEscortCarriers, true);
+                transitionAnyToExitMapAndEscortCarriers.AddTrigger(triggerPawnLost);
+                stateGraph.AddTransition(transitionAnyToExitMapAndEscortCarriers, true);
             }
 
             stateGraph.AddToil(lordToilExitMapTraderFighting);

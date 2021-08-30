@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <SrHositleTraderCaravanPassing>Караван враждебной фракции проходит мимо</SrHositleTraderCaravanPassing>
-
+    <SrHostileTraderCaravanPassing>Караван враждебной фракции проходит мимо</SrHostileTraderCaravanPassing>
 </Defs>

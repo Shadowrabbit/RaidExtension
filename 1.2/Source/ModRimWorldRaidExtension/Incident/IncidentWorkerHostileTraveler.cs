@@ -1,5 +1,5 @@
 // ******************************************************************
-//       /\ /|       @file       IncidentWorkerHositleTraveler.cs
+//       /\ /|       @file       IncidentWorkerHostileTraveler.cs
 //       \ V/        @brief      事件 敌对旅行者
 //       | "")       @author     Shadowrabbit, yingtu0401@gmail.com
 //       /  |                    
@@ -14,7 +14,7 @@ using Verse;
 namespace SR.ModRimWorld.RaidExtension
 {
     [UsedImplicitly]
-    public class IncidentWorkerHositleTraveler : IncidentWorker_TravelerGroup
+    public class IncidentWorkerHostileTraveler : IncidentWorker_TravelerGroup
     {
         protected override PawnGroupKindDef PawnGroupKindDef => PawnGroupKindDefOf.Combat;
 

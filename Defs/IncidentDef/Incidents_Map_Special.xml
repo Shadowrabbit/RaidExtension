@@ -30,7 +30,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraveler</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHostileTraveler</workerClass>
         <category>Misc</category>
         <baseChance>1</baseChance>
         <pointsScaleable>true</pointsScaleable>
@@ -42,7 +42,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHositleTraderCaravanPassing</workerClass>
+        <workerClass>SR.ModRimworld.RaidExtension.IncidentWorkerHostileTraderCaravanPassing</workerClass>
         <category>Misc</category>
         <baseChance>1</baseChance>
         <pointsScaleable>true</pointsScaleable>

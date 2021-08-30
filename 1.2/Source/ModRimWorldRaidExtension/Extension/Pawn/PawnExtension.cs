@@ -72,14 +72,14 @@ namespace SR.ModRimWorld.RaidExtension
         /// <summary>
         /// 寻找战利品
         /// </summary>
-        /// <param name="seacher"></param>
+        /// <param name="searcher"></param>
         /// <param name="root"></param>
         /// <param name="map"></param>
         /// <param name="maxDist"></param>
         /// <param name="disallowed"></param>
         /// <param name="validator"></param>
         /// <returns></returns>
-        public static Thing TryFindBestSpoilsToTake(this Pawn seacher, IntVec3 root, Map map, float maxDist,
+        public static Thing TryFindBestSpoilsToTake(this Pawn searcher, IntVec3 root, Map map, float maxDist,
             ICollection<Thing> disallowed = null, Predicate<Thing> validator = null)
         {
             if (map == null)
@@ -87,21 +87,21 @@ namespace SR.ModRimWorld.RaidExtension
                 return null;
             }
 
-            if (seacher != null && !seacher.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
+            if (searcher != null && !searcher.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
             {
                 return null;
             }
 
             //搜索者存在 但无法触碰地图边界 或者 搜索者不存在
-            if (seacher != null && !map.reachability.CanReachMapEdge(seacher.Position,
-                TraverseParms.For(seacher)) || (seacher == null && !map.reachability.CanReachMapEdge(root,
+            if (searcher != null && !map.reachability.CanReachMapEdge(searcher.Position,
+                TraverseParms.For(searcher)) || (searcher == null && !map.reachability.CanReachMapEdge(root,
                 TraverseParms.For(TraverseMode.PassDoors))))
             {
                 return null;
             }
 
             //验证器 搜索者不存在 或者搜索者可以预留当前物体 并且没有禁用 并且物体可以被偷 并且物品周围有敌对派系尸体
-            bool SpoilValidator(Thing t) => (seacher == null || seacher.CanReserve(t)) &&
+            bool SpoilValidator(Thing t) => (searcher == null || searcher.CanReserve(t)) &&
                                             (disallowed == null || !disallowed.Contains(t)) &&
                                             (validator == null || validator(t));
 

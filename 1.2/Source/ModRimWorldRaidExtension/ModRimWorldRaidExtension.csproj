@@ -9,7 +9,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>SR.ModRimWorld.RaidExtension</RootNamespace>
         <AssemblyName>ModRimWorldRaidExtension</AssemblyName>
-        <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,7 +46,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="AI\AIGroup\LordJobHositleTraderCaravanTravelAndExit.cs" />
+        <Compile Include="AI\AIGroup\LordJobHostileTraderCaravanTravelAndExit.cs" />
         <Compile Include="AI\AIGroup\LordJobLogging.cs" />
         <Compile Include="AI\AIGroup\LordJobPoaching.cs" />
         <Compile Include="AI\AIGroup\LordJobSiegeBase.cs" />
@@ -67,8 +67,8 @@
         <Compile Include="Extension\Map\MapExtension.cs" />
         <Compile Include="Extension\Pawn\PawnExtension.cs" />
         <Compile Include="Extension\Pawn\PlantExtension.cs" />
-        <Compile Include="Incident\IncidentWorkerHositleTraderCaravanPassing.cs" />
-        <Compile Include="Incident\IncidentWorkerHositleTraveler.cs" />
+        <Compile Include="Incident\IncidentWorkerHostileTraderCaravanPassing.cs" />
+        <Compile Include="Incident\IncidentWorkerHostileTraveler.cs" />
         <Compile Include="Incident\IncidentWorkerLogging.cs" />
         <Compile Include="Incident\IncidentWorkerPoaching.cs" />
         <Compile Include="Incident\RaidStrategyWorkerLogging.cs" />
